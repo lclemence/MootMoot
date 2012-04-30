@@ -5,6 +5,9 @@ Mootmoot::Application.routes.draw do
   match 'facebook' => 'home#fb_auth'
 
   match 'gallery' => 'gallery#view'
+  
+  resources :pictures
+  resources :galleries
 
 
   devise_scope :user do
