@@ -13,6 +13,8 @@ gem 'execjs'
 gem 'therubyracer' 
 
 gem 'devise'
+gem 'cancan'
+gem 'rolify'
 gem 'fb_graph'
 
 # Gems used only for assets and not required
