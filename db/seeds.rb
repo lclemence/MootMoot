@@ -14,6 +14,8 @@ Gallery.create(:name => "Fine Art")
 
 
 User.new({:email => "pelletj@gmail.com", :password => "chartreuse", :password_confirmation => "chartreuse" }).save 
+User.last.add_role :admin
+#Role.create({:name => "admin"}).save
 
 repository = "/home/jpellet/DEV/julienpellet.com-php/gallery/all"
 
