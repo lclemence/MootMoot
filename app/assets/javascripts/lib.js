@@ -1,4 +1,3 @@
-//console.log("Loading Script")
 var START=true;
 var galleryNames = [];
 
@@ -38,7 +37,7 @@ var displayData = {
 var galleryStorage = new Array();
 var galleryData = new Array();
 var picturesArray = new Array();
-function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,galleryName) {
+function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,galleryId,galleryName) {
 	this.id = id;
 	this.imageDOM = image;
 	this.src = src;
@@ -49,11 +48,12 @@ function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,ga
 	this.next = next;
 	this.position=position;
 	this.galleryName=galleryName;
+	this.galleryId=galleryId;
 };
 
 var addImage = function(src,id,title) {
 	var li     = new Element('li', {'class': 'thumb-page'});
-	var link   = new Element('a', {'class': 'thumb-link','href': '#'+id}).inject(li);
+	var link   = new Element('a', {'class': 'thumb-link','href': '#!'+id}).inject(li);
 	var thumb    = new Element('img', {'id':id,'src': src,'class':'mini'}).inject(link);
 	var footer = new Element('span').inject(thumb,'after');
 	footer.addClass('title');
@@ -65,9 +65,7 @@ var addImage = function(src,id,title) {
 
 function loadGallery(gallery) {
 	galleryData=galleryStorage[gallery];
-
 	Array.each(galleryStorage[gallery], function(picture, id){
-
 		document.getElementById("content").appendChild(picture.imageDOM.clone(true,true)); //"true,true" : keep content, keep id
 	});
 	initMouseOverThumb();
@@ -93,7 +91,9 @@ function initMouseOverThumb(){
 }
 
 
-
+function trim(stringToTrim) {
+	return stringToTrim.replace(/\s/g,'');
+}
 
 var PelletStudio = {
 	storedHash:"",
@@ -109,11 +109,20 @@ var PelletStudio = {
 			var id=false;
 			var title=false;
 	        Array.each(request, function(gallery, g_index){
-	    			galleryStorage[gallery.id]=new Array();
+	    			//galleryStorage[gallery.id]=new Array();
+	    			var Gname=trim(gallery.name).toUpperCase();	    			
+	    			galleryStorage[Gname]=new Array();	    			
 	    			galleryNames[gallery.id]=gallery.name;
+	    			
+	    			//display gallery name (menu)	    			    			
+	    			var html='<div class="menu-line">'+
+						'<div class="menu-item"><a href="#!'+(trim((gallery.name).toString())).toUpperCase()+'">'+(gallery.name).toUpperCase()+'</a></div>'+
+					'</div>';
+	    			$('menu-galleries').innerHTML=$('menu-galleries').innerHTML +html;
+	    			
 	
 	          Array.each(gallery.pictures, function(picture, p_index){
-	
+						
 	            
 							if (!galleryState.firstPicture) galleryState.firstPicture=id;
 							next=false;
@@ -124,21 +133,25 @@ var PelletStudio = {
 							caption=picture.caption;
 							
 	
-							galleryStorage[gallery.id][id]=
+							//galleryStorage[gallery.id][id]=
+							galleryStorage[Gname][id]=							
 								new galleryUnit(
 									id,
 									addImage(src_thumb,id),
 									src,
-	                src_thumb,
+	                				src_thumb,
 									title,
 									caption,
 									last,
 									next,
 									p_index,
-									gallery.id
+									gallery.id,
+									gallery.name
 							)
-							picturesArray[id]=galleryStorage[gallery.id][id];
-							if (last) galleryStorage[gallery.id][last].next=id;
+							//picturesArray[id]=galleryStorage[gallery.id][id];
+							picturesArray[id]=galleryStorage[Gname][id];							
+							//if (last) galleryStorage[gallery.id][last].next=id;
+							if (last) galleryStorage[Gname][last].next=id;
 							last=id;
 	
 	
@@ -216,40 +229,36 @@ var PelletStudio = {
 		} 
 	},//TODO change hardcode
 	hashChanged : function () {
+		
 		switch (PelletStudio.storedHash) {
-		 case "#main": //rien et main
+		 case "#!main": //rien et main
 		 case "":
 			$('content').empty();
 			Element('div', {'id':"random-picture"}).inject($('content'));
 			PelletStudio.displayRandomPictures();
-			 break;
-		 case "#portraits":
-			PelletStudio.displayGallery(1);
-			 break;
-		 case "#nature":
-			PelletStudio.displayGallery(2);
-			 break;
-		 case "#fine_art":
-			PelletStudio.displayGallery(3);
-			 break;
-		 case "#wellington":
-			PelletStudio.displayGallery(4);
-			 break;
-		 case "#about":
+			 break;		
+		 case "#!about":
 			PelletStudio.displayAbout();
 			break;
-		 case "#contact":
+		 case "#!contact":
 			PelletStudio.displayContact();
 			break;
 		 default:
-			var picture = picturesArray[PelletStudio.storedHash.substring(1)];
-			if (picture) {
-				if (!$(picture.id)) // Si la miniature n'est pas actuellement définie dans le DOM, on ne recharge pas la gallerie
-					PelletStudio.displayGallery(picture.galleryName);
-				PelletStudio.displayPic(picture.id);
-			} else {
-				Element('div', {'id':"random-picture"}).inject($('content'));
-				PelletStudio.displayRandomPictures();
+		 	
+			if(isNaN(PelletStudio.storedHash.substring(2).toInt())){								
+				PelletStudio.displayGallery(PelletStudio.storedHash.substring(2).toString());
+			}else{			
+				var picture = picturesArray[PelletStudio.storedHash.substring(2)];
+				
+				if (picture) {
+					if (!$(picture.id)) // Si la miniature n'est pas actuellement définie dans le DOM, on ne recharge pas la gallerie
+						
+						PelletStudio.displayGallery(trim(picture.galleryName).toUpperCase());						
+						PelletStudio.displayPic(picture.id);
+				} else {
+					Element('div', {'id':"random-picture"}).inject($('content'));
+					PelletStudio.displayRandomPictures();
+				}
 			}
 			break;
 		}
@@ -401,7 +410,7 @@ After the first 20kms a $1 per km travel charge may apply.\
 			}
 
 			var container = new Element('div', {'class': 'thumb-roll-container','id': 'roll-'+id});//.inject(li);;
-			var link   = new Element('a', {'class': 'thumb-roll','href': '#'+id}).inject(container);
+			var link   = new Element('a', {'class': 'thumb-roll','href': '#!'+id}).inject(container);
 
 			var thumb = picture.imageDOM.getElementsByTagName('img')[0].clone(true,true).inject(link);
 
@@ -477,17 +486,15 @@ After the first 20kms a $1 per km travel charge may apply.\
 	},
 	rollPrev : function(){
 		var prevPicId = galleryData[galleryState.firstPictureInRoll.toString()].last;
-		//console.log(prevPicId);
+	
 		if (prevPicId) {
 			
 			galleryState.rollSliding=true;
 			$('roll-next').style.visibility="visible";
 			$(prevPicId.toString()).style.display="";
 
-
-			var myFx = new Fx.Tween(prevPicId, {property: 'width'});
-			
-			//TODO fixed bug here			
+			var myFx = new Fx.Tween(prevPicId.toString(), {property: 'width'});
+						
 			myFx.start(0,galleryState.rollUnitWidth).chain(
 				function(){
 					galleryState.rollSliding=false;					
@@ -512,7 +519,7 @@ After the first 20kms a $1 per km travel charge may apply.\
 		
 	displayGallery:function(galleryName){
 		$('content').empty();
-
+		
 		galleryState.galleryLength=galleryStorage[galleryName].flatten().length;
 		loadGallery(galleryName);
 	}
