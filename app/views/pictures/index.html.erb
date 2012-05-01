@@ -16,9 +16,9 @@
     <td><%= picture.caption %></td>
     <td>
     <div class="btn-group">
-    <%= link_to raw('<i class="icon-trash icon-white"></i>Show'), picture, :class => 'btn btn-primary' %>
-    <%= link_to 'Edit', edit_picture_path(picture), :class => 'btn btn-primary' %>
-    <%= link_to 'Destroy', picture, :confirm => 'Are you sure?', :method => :delete , :class => 'btn btn-danger'%>
+    <%= link_to raw('<i class="icon-eye-open icon-white"></i> Show'), picture, :class => 'btn btn-primary' %>
+    <%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_picture_path(picture), :class => 'btn btn-primary' %>
+    <%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), picture, :confirm => 'Are you sure?', :method => :delete , :class => 'btn btn-danger'%>
     </div>
     </td>
   </tr>

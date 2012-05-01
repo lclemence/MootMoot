@@ -1,6 +1,6 @@
 //console.log("Loading Script")
 var START=true;
-var galleryNames = ['portraits','nature','wellington','fine_art'];
+var galleryNames = [];
 
 
 var rollState = {
@@ -108,62 +108,54 @@ var PelletStudio = {
 			var next=false;
 			var id=false;
 			var title=false;
-        Array.each(request, function(gallery, g_index){
-    			galleryStorage[gallery.id]=new Array();
-    
-
-          Array.each(gallery.pictures, function(picture, p_index){
-console.log(picture.url);
-            
-						if (!galleryState.firstPicture) galleryState.firstPicture=id;
-						next=false;
-						id=picture.id;
-						src=picture.url;
-						src_thumb=picture.thumb_url;
-						title=picture.title;
-						caption=picture.caption;
-						
-console.log(src_thumb)
-
-						galleryStorage[gallery.id][id]=
-							new galleryUnit(
-								id,
-								addImage(src_thumb,id),
-								src,
-                src_thumb,
-								title,
-								caption,
-								last,
-								next,
-								p_index,
-								gallery.id
-						)
-						picturesArray[id]=galleryStorage[gallery.id][id];
-						if (last) galleryStorage[gallery.id][last].next=id;
-						last=id;
-
-
-
-          })          
-        })
-				PelletStudio.galleriesLoaded();
+	        Array.each(request, function(gallery, g_index){
+	    			galleryStorage[gallery.id]=new Array();
+	    			galleryNames[gallery.id]=gallery.name;
+	
+	          Array.each(gallery.pictures, function(picture, p_index){
+	
+	            
+							if (!galleryState.firstPicture) galleryState.firstPicture=id;
+							next=false;
+							id=picture.id;
+							src=picture.url;
+							src_thumb=picture.thumb_url;
+							title=picture.title;
+							caption=picture.caption;
+							
+	
+							galleryStorage[gallery.id][id]=
+								new galleryUnit(
+									id,
+									addImage(src_thumb,id),
+									src,
+	                src_thumb,
+									title,
+									caption,
+									last,
+									next,
+									p_index,
+									gallery.id
+							)
+							picturesArray[id]=galleryStorage[gallery.id][id];
+							if (last) galleryStorage[gallery.id][last].next=id;
+							last=id;
+	
+	
+	
+	          })          
+	        })
+					PelletStudio.galleriesLoaded();
       }
 
 
 
-			var ajax = new Request.JSON( {
-				url : 'gallery.json',
-				method: 'get',
-				encoding: 'utf-8',
-				onSuccess: parseGalleryJSON
-			}).send();
-
-
-
-//		Array.each(galleryNames, function(name, id){
-//			PelletStudio.getGallery(name);
-//		});
-		
+		var ajax = new Request.JSON( {
+			url : 'gallery.json',
+			method: 'get',
+			encoding: 'utf-8',
+			onSuccess: parseGalleryJSON
+		}).send();
 
 		if (window.location.hash.length==0 && $('hash')) {
 			PelletStudio.storedHash=$('hash').className;
@@ -214,7 +206,7 @@ console.log(src_thumb)
 
 	},
 	resizeContents : function() {
-	console.log(displayData.screenWidth-displayData.menuSize);
+	
 		if (displayData.screenWidth-displayData.menuSize<900) {
 //			Asset.css('../css/smallScreen.css', {id: 'myStyle', title: 'myStyle'});
 //			galleryState.maxPicsInRoll=5;
@@ -222,7 +214,7 @@ console.log(src_thumb)
 			Asset.css('../css/wideScreen.css', {id: 'myStyle', title: 'myStyle'});
 //			galleryState.maxPicsInRoll=5;
 		} 
-	},
+	},//TODO change hardcode
 	hashChanged : function () {
 		switch (PelletStudio.storedHash) {
 		 case "#main": //rien et main
@@ -303,7 +295,7 @@ console.log(src_thumb)
 
 
 		START=false;
-	},
+	},//TODO change about page
 	displayAbout:function() {
 		$('content').empty();
 		var about    = new Element('div', {'id':'about'}).inject($('content'));
@@ -315,7 +307,7 @@ After the first 20kms a $1 per km travel charge may apply.\
 <!--br><br><br><strong>Events / Sports - POA </strong><br><br-->\
 ");
 
-	},
+	},//TODO change contact page
 	displayContact:function() {
 		$('content').empty();
 		var about    = new Element('div', {'id':'contact'}).inject($('content'));
@@ -485,18 +477,24 @@ After the first 20kms a $1 per km travel charge may apply.\
 	},
 	rollPrev : function(){
 		var prevPicId = galleryData[galleryState.firstPictureInRoll.toString()].last;
+		//console.log(prevPicId);
 		if (prevPicId) {
+			
 			galleryState.rollSliding=true;
 			$('roll-next').style.visibility="visible";
 			$(prevPicId.toString()).style.display="";
 
 
 			var myFx = new Fx.Tween(prevPicId, {property: 'width'});
+			
+			//TODO fixed bug here			
 			myFx.start(0,galleryState.rollUnitWidth).chain(
 				function(){
-					galleryState.rollSliding=false;
+					galleryState.rollSliding=false;					
 				}
 			);
+			
+
 
 //			$(prevPicId.toString()).set('tween', {transition: Fx.Transitions.Quint.easeOut});
 //			$(prevPicId.toString()).tween('width', galleryState.rollUnitWidth);

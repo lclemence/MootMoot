@@ -2,5 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @gallery %> |
-<%= link_to 'Back', galleries_path %>
+<div class="btn-group">
+	<%= link_to raw('<i class="icon-arrow-left"></i> Back'), galleries_path, :class => 'btn'  %>
+	<%= link_to raw('<i class="icon-eye-open"></i> Show'), @gallery, :class => 'btn'  %>
+</div>

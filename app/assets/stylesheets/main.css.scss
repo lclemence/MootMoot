@@ -3,7 +3,7 @@ body {
 	height:100%;
 	margin:0 auto; /* for the rest */
 	background-color:white;
-	font-family:"Helvetica","Arial","Verdana","sans-serif";
+	font-family:"Helvetica","Arial","Verdana","sans-serif";	
 }
 
 .auth-container{
@@ -25,7 +25,10 @@ body {
 }
 
 
-a,a:active,a:hover,a:visited,a:link { outline-color:invert;outline-style:none;outline-width:medium;font-weight:bold; color:black; text-decoration:none;cursor:pointer;}
+a,a:active,a:hover,a:visited,a:link { outline-color:invert;outline-style:none;
+outline-width:medium;font-weight:bold; text-decoration:none;cursor:pointer;}
+
+.menu-line a{color:black;}
 
 #social {
 	position:fixed;
@@ -95,7 +98,7 @@ user-select: none;
 	float : left;
 	background-color:black;
 	margin-top:12px;
-	margin-bottom:5px;
+	margin-bottom:25px;
 	margin-left:80px;
 
 }
@@ -142,8 +145,9 @@ user-select: none;
 
 #roll{
 	width:940px;
-	height:80px;
+	height:70px;
 	margin-left:-20px;
+	margin-bottom:5px;
 	overflow:hidden;
 	text-align:center;
 }

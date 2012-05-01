@@ -4,16 +4,18 @@
   <tr>
     <th>Name</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @galleries.each do |gallery| %>
   <tr>
     <td><%= gallery.name %></td>
-    <td><%= link_to 'Show', gallery, :class => 'btn btn-primary'  %></td>
-    <td><%= link_to 'Edit', edit_gallery_path(gallery), :class => 'btn btn-primary'  %></td>
-    <td><%= link_to 'Destroy', gallery, :confirm => 'Are you sure?', :method => :delete , :class => 'btn btn-danger' %></td>
+    <td>
+    	<div class="btn-group">
+    		<%= link_to raw('<i class="icon-eye-open icon-white"></i> Show'), gallery, :class => 'btn btn-primary'  %>
+    		<%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_gallery_path(gallery), :class => 'btn btn-primary'  %>
+    		<%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), gallery, :confirm => 'Are you sure?', :method => :delete , :class => 'btn btn-danger' %>
+    	</div>
+    </td>	
   </tr>
 <% end %>
 </table>
