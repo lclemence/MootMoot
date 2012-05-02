@@ -6,8 +6,8 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
 
-
-Gallery.create(:name => "WELLINGTON")
+Gallery.delete_all
+gal = Gallery.create(:name => "WELLINGTON")
 Gallery.create(:name => "Nature")
 Gallery.create(:name => "Portrait")
 Gallery.create(:name => "Fine Art")
@@ -17,8 +17,11 @@ User.new({:email => "pelletj@gmail.com", :password => "chartreuse", :password_co
 User.last.add_role :admin
 #Role.create({:name => "admin"}).save
 
-repository = "/home/jpellet/DEV/julienpellet.com-php/gallery/all"
-
+#repository = "/home/jpellet/DEV/julienpellet.com-php/gallery/all"
+repository = "/home/clemence/Pictures/all"
+Categorization.delete_all
+Picture.delete_all
+i=0
 Dir.glob(repository+"/**/*").each do |file|
   if !File.directory?(file)
 
@@ -26,8 +29,12 @@ Dir.glob(repository+"/**/*").each do |file|
 
     if !cdn_filename['thumb']
       thumb_url = cdn_filename.gsub('images','thumbs')
-
-      Picture.create(:url => cdn_filename, :thumb_url => thumb_url, :title => "test title", :caption => "test caption", :gallery_id =>2 )
+       
+      pic = Picture.create(:url => cdn_filename, :thumb_url => thumb_url, :title => "test title", :caption => "test caption" )
+     
+      Categorization.create(:gallery => gal, :picture =>pic, :order => i)
+      #Categorization.create(:gallery_id => gal.id, :picture_id =>pic.id)
+      i=i+1
     end
   end
 end
