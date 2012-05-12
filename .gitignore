@@ -3,4 +3,5 @@ tmp/*
 s/*
 app/assets/stylesheets/main.css.scss~
 app/views/devise/sessions/new.html.erb~
+app/views/devise/passwords/new.html.erb~
 
