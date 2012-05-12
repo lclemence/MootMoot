@@ -80,4 +80,31 @@ class PicturesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def upload
+      @final_filenames = []
+    
+      params[:uploads].each do |u|
+        
+        @final_filenames << upload_picture(u)
+      end
+      
+      render 'upload.html.erb'
+  end
+  
+  def upload_picture(upload_file)
+     uploaded_io = upload_file
+      filename = uploaded_io.original_filename
+      upload_dir='/tmp/upload-pictures'
+      unless File.directory?(upload_dir)
+        Dir.mkdir(upload_dir)
+      end
+      File.open(Rails.root.join(upload_dir, filename), 'w') do |file|
+        file.write(uploaded_io.read)
+      end
+      md5 = Digest::MD5.hexdigest(File.read(Rails.root.join(upload_dir, filename)))
+      final_filename = md5 +'-'+ filename
+     # AWS::S3::S3Object.store(final_filename, open(Rails.root.join(upload_dir, filename)), 'mootmoot')
+   end
+  
 end

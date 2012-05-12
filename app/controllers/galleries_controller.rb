@@ -79,5 +79,6 @@ class GalleriesController < ApplicationController
       format.html { redirect_to galleries_url }
       format.json { head :no_content }
     end
-  end
+  end  
+  
 end
