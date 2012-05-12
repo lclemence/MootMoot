@@ -7,9 +7,11 @@ Mootmoot::Application.routes.draw do
   match 'gallery' => 'gallery#view'
   
   resources :pictures
+  
   resources :galleries
-
-
+  
+  match 'upload' => 'pictures#upload'
+    
   devise_scope :user do
     get "/logout" => "devise/sessions#destroy"
   end
