@@ -1,3 +1,6 @@
 log/development.log
 tmp/*
 s/*
+app/assets/stylesheets/main.css.scss~
+app/views/devise/sessions/new.html.erb~
+
