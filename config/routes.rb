@@ -10,6 +10,8 @@ Mootmoot::Application.routes.draw do
   
   resources :galleries
   
+  match 'admin' => 'admin#index'  
+
   match 'upload' => 'pictures#upload'
     
   devise_scope :user do

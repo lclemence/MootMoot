@@ -4,4 +4,9 @@ s/*
 app/assets/stylesheets/main.css.scss~
 app/views/devise/sessions/new.html.erb~
 app/views/devise/passwords/new.html.erb~
+app/controllers/admin_controller.rb~
+app/controllers/application_controller.rb~
+app/views/layouts/admin.html.erb~
+config/routes.rb~
+
 
