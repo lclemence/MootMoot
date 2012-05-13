@@ -1,5 +1,15 @@
+<script>
+function gallery_show(gallery_id){
+	$('#modal_gallery_'+gallery_id).modal('show');
+}
+$(document).ready(function() {
+	//$('#modal_pictures_gallery').modal();
+});
+</script>
 <h1>Listing galleries</h1>
-
+<br />
+<%= link_to 'New Gallery', new_gallery_path, :class => 'btn' %>
+<br /><br />
 <table  class="table table-striped table-bordered table-condensed">
   <tr>
     <th>Name</th>
@@ -11,7 +21,8 @@
     <td><%= gallery.name %></td>
     <td>
     	<div class="btn-group">
-    		<%= link_to raw('<i class="icon-eye-open icon-white"></i> Show'), gallery, :class => 'btn btn-primary'  %>
+    		
+    		<a class="btn btn-primary" href="#" onclick="gallery_show(<%= gallery.id%>)"><i class="icon-eye-open icon-white"></i> Show</a>
     		<%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_gallery_path(gallery), :class => 'btn btn-primary'  %>
     		<%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), gallery, :confirm => 'Are you sure?', :method => :delete , :class => 'btn btn-danger' %>
     	</div>
@@ -20,6 +31,36 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Gallery', new_gallery_path, :class => 'btn' %>
+<% @galleries.each do |gallery| %>
+	<div class="modal" id="modal_gallery_<%= gallery.id%>" style="display: none;width:730px;">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">
+				×
+			</button>
+			<h3><%= gallery.name%></h3>
+		</div>
+		<div class="modal-body">			
+			<div id="gallery_left" style="float:left;width:336px;">
+				<h4>Current pictures</h4>
+				<% gallery.pictures.each do |picture| %>
+					<div id="picture_<%= picture.id%>" style="float:left;padding:2px 2px 2px 2px;">
+						<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
+					</div>	
+				<% end %>
+			</div>
+			<div class="vertical_line"></div>
+			<div id="gallery_right" style="float:left;width:336px;">
+				<h4>All pictures</h4>
+				<% Picture.all.each do |picture| %>
+					<div id="picture_<%= picture.id%>" style="float:left;padding:2px 2px 2px 2px;">
+						<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
+					</div>	
+				<% end %>
+			</div>
+		</div>		
+		<div class="modal-footer">
+			<a href="#" class="btn">Cancel</a>
+			<a href="#" class="btn btn-primary">Save changes</a>
+		</div>
+	</div>
+<% end %>

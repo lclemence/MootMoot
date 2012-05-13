@@ -11,3 +11,12 @@
  *= require_self
  *= require_tree .
 */
+
+.vertical_line{
+	float:left;
+	background-color: #CCCCCC;
+    margin-left: 5px;
+    margin-right: 5px;
+    height:600px;
+    width: 1px;
+}

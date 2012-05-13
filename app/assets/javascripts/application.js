@@ -13,4 +13,4 @@
 //= require mootools-core-1.4.5-full-nocompat
 //= require mootools-more-1.4.0.1
 //= require lib
-//= require_tree .
+// require_tree .
