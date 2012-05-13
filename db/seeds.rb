@@ -25,7 +25,7 @@ i=0
 Dir.glob(repository+"/**/*").each do |file|
   if !File.directory?(file)
 
-     cdn_filename = file.gsub(repository,"http://192.168.1.67/jp/gallery/all")
+     cdn_filename = file.gsub(repository,"all")
 
     if !cdn_filename['thumb']
       thumb_url = cdn_filename.gsub('images','thumbs')
