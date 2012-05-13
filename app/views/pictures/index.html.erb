@@ -1,3 +1,10 @@
+<script>
+
+
+
+</script>
+
+
 <h1>Listing pictures</h1>
 <br/>
 
@@ -16,7 +23,7 @@
 
 <% @pictures.each do |picture| %>
   <tr>  
-    <td><img src="<%= picture.thumb_url %>"/></td>
+    <td><img class='thumb' src="<%= picture.thumb_url %>"/></td>
     <td><%= picture.title %></td>
     <td><%= picture.caption %></td>
     <td>

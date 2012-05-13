@@ -9,4 +9,11 @@ app/controllers/application_controller.rb~
 app/views/layouts/admin.html.erb~
 config/routes.rb~
 
+app/controllers/galleries_controller.rb~
+app/controllers/pictures_controller.rb~
+app/views/admin/index.html.erb~
+app/views/pictures/index.html.erb~
+db/seeds.rb~
 
+
+app/assets/javascripts/application.js~

@@ -4,7 +4,12 @@ class PicturesController < ApplicationController
   # GET /pictures
   # GET /pictures.json
   def index
-    @pictures = Picture.all
+
+    if params.has_key?('last')
+      @pictures = Picture.find(:all, :conditions => ['id not in (?)', Categorization.all])
+    else
+      @pictures = Picture.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -115,6 +120,17 @@ class PicturesController < ApplicationController
       md5_thumb = Digest::MD5.hexdigest(File.read(Rails.root.join(upload_dir, 'thumb-'+filename)))
       md5_thumb_filename = md5_thumb + File.extname(filename)
       File.rename(Rails.root.join(upload_dir, 'thumb-'+filename) , Rails.root.join(upload_dir, md5_thumb_filename))
+
+
+      Picture.create(
+          :url => '/pictures/' + md5_filename, 
+          :thumb_url => '/pictures/' + md5_thumb_filename, 
+          :thumb_width => thumb.columns,
+          :thumb_height => thumb.rows,
+          :title => "test title", 
+          :caption => "test caption" )
+
+      redirect_to pictures_path+'?last'
 
    end
   
