@@ -12,7 +12,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-wrrfugheriuh
+
+<section id="navbar">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a href="<%= root_url %>" class="brand">Project name</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li <%=raw('class="active"') if params[:controller] == "admin" %>><a href="<%= admin_path %>">Admin</a></li>
+            <li <%=raw('class="active"') if params[:controller] == "galleries" %>><a href="<%= galleries_path %>">Galleries</a></li>
+            <li <%=raw('class="active"') if params[:controller] == "pictures" %>><a href="<%= pictures_path %>">Pictures</a></li>
+          </ul>
+          <!--form action="" class="navbar-search pull-left">
+            <input type="text" placeholder="Search" class="search-query span2">
+          </form-->
+          <ul class="nav pull-right">
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div><!-- /navbar -->
+</section>
+ 
+
 <%= yield %>
 
 </body>

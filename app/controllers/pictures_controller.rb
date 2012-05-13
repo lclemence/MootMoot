@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+  before_filter :verify_admin
+
   # GET /pictures
   # GET /pictures.json
   def index

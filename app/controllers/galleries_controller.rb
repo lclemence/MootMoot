@@ -1,4 +1,6 @@
 class GalleriesController < ApplicationController
+  before_filter :verify_admin
+
   # GET /galleries
   # GET /galleries.json
   def index
