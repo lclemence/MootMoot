@@ -16,6 +16,7 @@ gem 'devise'
 gem 'cancan'
 gem 'rolify'
 gem 'fb_graph'
+gem 'rmagick'
 
 # Gems used only for assets and not required
 # in production environments by default.

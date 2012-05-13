@@ -1,0 +1,7 @@
+<!--form action='<%= upload_path%>' method='post' enctype='multipart/form-data'-->
+<%=form_tag(upload_path, :method => "post", :enctype => 'multipart/form-data')%>
+  <input name='uploads[]' type="file" multiple>
+  <input type='submit' class="btn btn-primary" value="Upload pictures">
+<!--/form-->
+
+</form>

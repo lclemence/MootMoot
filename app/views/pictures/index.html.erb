@@ -1,12 +1,15 @@
+<script>
+
+
+
+</script>
+
+
 <h1>Listing pictures</h1>
 <br/>
 
 
 <%= link_to 'New Picture', new_picture_path , :class => 'btn'%>
-<form action='<%= upload_path%>' method='post' enctype='multipart/form-data'>
-  <input name='uploads[]' type="file" multiple>
-  <input type='submit' class="btn btn-primary" value="Upload pictures">
-</form>
 
 <br/><br/>
 <table class="table table-striped table-bordered table-condensed">
@@ -20,7 +23,7 @@
 
 <% @pictures.each do |picture| %>
   <tr>  
-    <td><img src="<%= picture.thumb_url %>"/></td>
+    <td><img class='thumb' src="<%= picture.thumb_url %>"/></td>
     <td><%= picture.title %></td>
     <td><%= picture.caption %></td>
     <td>
