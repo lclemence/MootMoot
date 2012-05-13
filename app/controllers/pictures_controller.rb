@@ -85,19 +85,16 @@ class PicturesController < ApplicationController
   
   def upload
       @final_filenames = []
-    
       params[:uploads].each do |u|
-        
         @final_filenames << upload_picture(u)
       end
-      
-      render 'upload.html.erb'
   end
   
   def upload_picture(upload_file)
      uploaded_io = upload_file
       filename = uploaded_io.original_filename
-      upload_dir='/tmp/upload-pictures'
+      upload_dir=Rails.root.join('public/pictures')
+
       unless File.directory?(upload_dir)
         Dir.mkdir(upload_dir)
       end
@@ -105,8 +102,36 @@ class PicturesController < ApplicationController
         file.write(uploaded_io.read)
       end
       md5 = Digest::MD5.hexdigest(File.read(Rails.root.join(upload_dir, filename)))
-      final_filename = md5 +'-'+ filename
+      md5_filename = md5 + File.extname(filename) 
+
+      File.rename(Rails.root.join(upload_dir, filename) , Rails.root.join(upload_dir, md5_filename))
+
      # AWS::S3::S3Object.store(final_filename, open(Rails.root.join(upload_dir, filename)), 'mootmoot')
+
+      thumb = resize upload_dir, md5_filename
+
+      thumb.write(File.join(upload_dir, 'thumb-'+filename))
+
+      md5_thumb = Digest::MD5.hexdigest(File.read(Rails.root.join(upload_dir, 'thumb-'+filename)))
+      md5_thumb_filename = md5_thumb + File.extname(filename)
+      File.rename(Rails.root.join(upload_dir, 'thumb-'+filename) , Rails.root.join(upload_dir, md5_thumb_filename))
+
    end
   
+
+  def resize(upload_dir, filename)
+    img_orig = Magick::Image.read(File.join(upload_dir, filename)).first
+    width_orig = img_orig.columns
+    height_orig = img_orig.rows
+  
+    new_h = 140
+    new_w = width_orig * new_h / height_orig
+    if (new_w < 220)
+      new_w = 220
+      new_h = height_orig * new_w / width_orig
+    end
+
+    img_orig.resize(new_w,new_h)
+  end
+
 end
