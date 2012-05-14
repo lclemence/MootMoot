@@ -12,7 +12,6 @@
 //
 //= require mootools-core-1.4.5-full-nocompat
 //= require mootools-more-1.4.0.1
-// require lib
 //= require jquery
 //= require jquery-ui-1.8.20.custom.min
 //= require bootstrap-modal
