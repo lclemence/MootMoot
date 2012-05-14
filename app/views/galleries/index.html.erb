@@ -1,9 +1,25 @@
 <script>
 function gallery_show(gallery_id){
 	$('#modal_gallery_'+gallery_id).modal('show');
+	$('#gallery_right_'+gallery_id).sortable({
+		revert: true
+	});
+	$('#gallery_left_'+gallery_id+' li').each(function(key,value){
+		$('#'+value.id).draggable({
+			connectToSortable:'#gallery_right_'+gallery_id,
+			helper:'clone'
+			,revert:'invalid'
+		});
+	});
+	$( "ul, li" ).disableSelection();
+
 }
+function submit_gallery(gallery_id){
+	console.log(gallery_id);
+	$('#form_gallery_'+gallery_id).submit();
+}
+
 $(document).ready(function() {
-	//$('#modal_pictures_gallery').modal();
 });
 </script>
 <h1>Listing galleries</h1>
@@ -39,28 +55,38 @@ $(document).ready(function() {
 			</button>
 			<h3><%= gallery.name%></h3>
 		</div>
-		<div class="modal-body">			
-			<div id="gallery_left" style="float:left;width:336px;">
-				<h4>Current pictures</h4>
-				<% gallery.pictures.each do |picture| %>
-					<div id="picture_<%= picture.id%>" style="float:left;padding:2px 2px 2px 2px;">
-						<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
-					</div>	
-				<% end %>
+		<div class="modal-body" style="max-height:350px;">			
+			<div style="float:left;width:336px;">
+				<h4>All pictures</h4>
+				<ul id="gallery_left_<%= gallery.id%>" style="width:336px;">					
+					<% Picture.all.each do |picture| %>
+						<li id="left_gallery_<%= gallery.id%>_picture_<%= picture.id%>" style="float:left;padding:2px 2px 2px 2px;">
+							<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
+							<input type="hidden" name="pictures[]" value="<%= picture.id%>"/>
+						</li>	
+					<% end %>
+				</ul>
 			</div>
 			<div class="vertical_line"></div>
-			<div id="gallery_right" style="float:left;width:336px;">
-				<h4>All pictures</h4>
-				<% Picture.all.each do |picture| %>
-					<div id="picture_<%= picture.id%>" style="float:left;padding:2px 2px 2px 2px;">
-						<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
-					</div>	
-				<% end %>
-			</div>
+			<div style="float:left;width:336px;">
+				<h4>Current pictures</h4>
+				<%=form_tag(picturestogallery_path, :method => "post", :name => "form_gallery_" + gallery.id.to_s) %>	
+					<input type="hidden" name="gallery_id" value="<%=gallery.id%>"/>			
+					<ul id="gallery_right_<%= gallery.id%>" style="min-height:300px;width:336px;">					
+						<% gallery.pictures.each do |picture| %>
+							<li style="float:left;padding:2px 2px 2px 2px;">
+								<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
+							</li>	
+						<% end %>
+					</ul>
+				</form>
+				<div class="img-trash" style="float:right;width:80px;">
+				</div>
+			</div>						
 		</div>		
 		<div class="modal-footer">
 			<a href="#" class="btn">Cancel</a>
-			<a href="#" class="btn btn-primary">Save changes</a>
+			<a href="#" class="btn btn-primary" onclick="submit_gallery(<%= gallery.id%>)">Save changes</a>
 		</div>
 	</div>
 <% end %>

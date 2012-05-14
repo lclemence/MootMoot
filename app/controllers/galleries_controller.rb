@@ -83,4 +83,15 @@ class GalleriesController < ApplicationController
     end
   end  
   
+  def add_pictures_to_gallery
+    gal = Gallery.find(params[:gallery_id])
+    pictures = params[:pictures]
+    
+    pictures.each do |p|
+      pic = Picture.find(p)
+      Categorization.create(:gallery => gal, :picture =>pic, :order => 0) 
+    end
+    
+  end
+  
 end
