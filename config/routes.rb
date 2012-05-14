@@ -1,4 +1,6 @@
 Mootmoot::Application.routes.draw do
+  resources :constants
+
   devise_for :users
 
   root :to => "home#index"
@@ -13,6 +15,8 @@ Mootmoot::Application.routes.draw do
   match 'admin' => 'admin#index'  
 
   match 'upload' => 'pictures#upload'
+  
+  match 'picturestogallery' => 'galleries#add_pictures_to_gallery'
     
   devise_scope :user do
     get "/logout" => "devise/sessions#destroy"
