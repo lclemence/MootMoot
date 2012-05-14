@@ -2,6 +2,11 @@ public/all
 log/development.log
 tmp/*
 s/*
+Gemfile~
+app/views/galleries/index.html.erb~
+app/views/galleries/show.html.erb~
+config/application.rb~
+
 app/assets/stylesheets/main.css.scss~
 app/views/devise/sessions/new.html.erb~
 app/views/devise/passwords/new.html.erb~
