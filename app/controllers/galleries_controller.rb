@@ -85,13 +85,18 @@ class GalleriesController < ApplicationController
   
   def add_pictures_to_gallery
     gal = Gallery.find(params[:gallery_id])
+  
     pictures = params[:pictures]
-    
-    pictures.each do |p|
-      pic = Picture.find(p)
-      Categorization.create(:gallery => gal, :picture =>pic, :order => 0) 
+    if pictures
+      i=0
+      Categorization.delete_all(:gallery_id => ["gallery_id = ?", gal.id])
+      pictures.each do |p|
+        pic = Picture.find(p)
+        Categorization.create(:gallery => gal, :picture =>pic, :order => i) 
+        i=i+1
+      end
     end
-    
+    redirect_to galleries_url
   end
   
 end

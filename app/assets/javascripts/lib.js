@@ -57,7 +57,7 @@ var addImage = function(src,id,title) {
 	var thumb    = new Element('img', {'id':id,'src': src,'class':'mini'}).inject(link);
 	var footer = new Element('span').inject(thumb,'after');
 	footer.addClass('title');
-	footer.set('text', title);
+	//footer.set('text', title);
 	li.addEvent('click', function(e) {loadPic(id)});
 	return li;
 }

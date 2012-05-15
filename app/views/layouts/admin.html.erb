@@ -2,16 +2,17 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-	<title>Julien Pellet Photography</title>
+	<title><%= Constant.find_by_name('project').value%> Photography</title>
 	<meta http-equiv="Charset" content="application/xhtml+xml; charset=UTF-8" />
 	<meta name="keywords" content="Julien Pellet,Pellet Julien,wellington,new zealand,galerie, gallery, photo, art, photographer, photography, portfolio, book, macro, nature, abstract" />
 	<meta name="description" content= "Julien Pellet, photographer in Wellington - New Zealand, display his work on New Zealand lanscapes and Wellington urban photography">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <% if controller_name == 'home'%>
-  	<%= javascript_include_tag "application" %>
-  <% else%>
-  	<%= javascript_include_tag "admin" %>
+ 	<%= stylesheet_link_tag    "application", :media => "all" %>
+ 	<%= stylesheet_link_tag    "admin", :media => "all" %>
+  <% if controller_name == 'home'%>  	
+  	<%= javascript_include_tag "application" %>  	 
+  <% else%>  
+  	<%= javascript_include_tag "admin" %>  	 
   <% end%>
   <%= csrf_meta_tags %>
 </head>
@@ -26,7 +27,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a href="<%= root_url %>" class="brand">Project name</a>
+        <a href="<%= root_url %>" class="brand"><%= Constant.find_by_name('project').value%></a>
         <div class="nav-collapse">
           <ul class="nav">
             <li <%=raw('class="active"') if params[:controller] == "admin" %>><a href="<%= admin_path %>">Admin</a></li>
@@ -45,8 +46,8 @@
   </div><!-- /navbar -->
 </section>
  
-
-<%= yield %>
-
+<div class="content_admin">
+	<%= yield %>
+</div>
 </body>
 </html>
