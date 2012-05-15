@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+Constant.create(:name => 'project', :value => 'Julien Pellet')
 
 Gallery.delete_all
 gal = Gallery.create(:name => "WELLINGTON")
@@ -12,6 +13,7 @@ Gallery.create(:name => "Nature")
 Gallery.create(:name => "Portrait")
 Gallery.create(:name => "Fine Art")
 
+User.new({:email => "toto@gmail.com", :password => "chartreuse", :password_confirmation => "chartreuse" }).save
 
 User.new({:email => "pelletj@gmail.com", :password => "chartreuse", :password_confirmation => "chartreuse" }).save 
 User.last.add_role :admin
