@@ -6,6 +6,8 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
 Constant.create(:name => 'project', :value => 'Julien Pellet')
+Constant.create(:name => 'minwidth_thumb', :value => '200')
+Constant.create(:name => 'minheight_thumb', :value => '140')
 
 Gallery.delete_all
 gal = Gallery.create(:name => "WELLINGTON")
