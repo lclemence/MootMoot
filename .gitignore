@@ -1,5 +1,6 @@
 public/
 log/development.log
+db/development.sqlite3
 tmp/*
 s/*
 Gemfile~
