@@ -16,6 +16,8 @@ Mootmoot::Application.routes.draw do
 
   match 'upload' => 'pictures#upload'
   
+  match 'editparams' => 'admin#editparams'
+  
   match 'picturestogallery' => 'galleries#add_pictures_to_gallery'
     
   devise_scope :user do
