@@ -93,6 +93,8 @@ class PicturesController < ApplicationController
       params[:uploads].each do |u|
         @final_filenames << upload_picture(u)
       end
+      
+      redirect_to pictures_path+'?last'
   end
   
   def upload_picture(upload_file)
@@ -130,7 +132,7 @@ class PicturesController < ApplicationController
           :title => "test title", 
           :caption => "test caption" )
 
-      redirect_to pictures_path+'?last'
+      
 
    end
   
