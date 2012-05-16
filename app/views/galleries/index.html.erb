@@ -7,12 +7,28 @@ function gallery_show(gallery_id){
 	$('#gallery_right_'+gallery_id).sortable({
 		revert: true
 	});
+	/*$('#gallery_trash').droppable(
+			tolerance: 'touch',	
+            over: function() {
+                   $(this).removeClass('out').addClass('over');
+            },
+            out: function() {
+                    $(this).removeClass('over').addClass('out');
+            },
+            drop: function() {
+                    var answer = confirm('Permantly delete this item?');
+                    $(this).removeClass('over').addClass('out');
+            }
+		
+	);*/
+	
 	$('#gallery_left_'+gallery_id+' li').each(function(key,value){
 		$('#'+value.id).draggable({
 			connectToSortable:'#gallery_right_'+gallery_id,
 			helper:'clone'
 			,revert:'invalid'
-		});
+		});		
+		
 	});
 	$( "ul, li" ).disableSelection();
 
@@ -72,19 +88,18 @@ $(document).ready(function() {
 			<div class="vertical_line"></div>
 			<div style="float:left;width:336px;">
 				<h4>Current pictures</h4>
-				<%=form_tag(picturestogallery_path, :method => "post", :name => "form_gallery_" + gallery.id.to_s) %>	
+				<%=form_tag(picturestogallery_path, :method => "post", :id => "form_gallery_" + gallery.id.to_s, :name => "form_gallery_" + gallery.id.to_s) %>	
 					<input type="hidden" name="gallery_id" value="<%=gallery.id%>"/>			
-					<ul id="gallery_right_<%= gallery.id%>" style="min-height:300px;width:336px;">					
+					<ul id="gallery_right_<%= gallery.id%>" style="min-height:280px;width:336px;">					
 						<% gallery.pictures.each do |picture| %>
 							<li style="float:left;padding:2px 2px 2px 2px;" class="ui-state-default">
 								<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
 								<input type="hidden" name="pictures[]" value="<%= picture.id%>"/>
 							</li>	
 						<% end %>
-					</ul>
-					<input type="submit" value="save"/>
-				</form>
-				<div class="img-trash" style="float:right;width:80px;">
+					</ul>					
+					<div id="gallery_trash" class="img-trash" style="float:right;">
+				</form>				
 				</div>
 			</div>						
 		</div>		
