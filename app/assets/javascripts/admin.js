@@ -15,3 +15,4 @@
 //= require jquery
 //= require jquery-ui-1.8.20.custom.min
 //= require bootstrap-modal
+//= require ysr-crop

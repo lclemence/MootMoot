@@ -6,7 +6,8 @@ class PicturesController < ApplicationController
   def index
 
     if params.has_key?('last')
-      @pictures = Picture.find(:all, :conditions => ['id not in (?)', Categorization.all])
+     # @pictures = Picture.find(:all, :conditions => ['id not in (?)', Categorization.select(:picture_id).all])      
+      @pictures = Picture.where(' id not in (SELECT picture_id from categorizations)')
     else
       @pictures = Picture.all
     end

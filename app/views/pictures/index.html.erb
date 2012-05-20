@@ -1,3 +1,42 @@
+<script>
+  jQuery.noConflict();
+  var array_pictures=[];
+  var i=0;
+window.addEvent('domready', function() {
+	var array_ch=[];
+	
+	Array.each(array_pictures,function(k,v){
+		
+		array_ch[k] = new CwCrop({
+		    onCrop: function(values) {
+		        
+		       new Request({
+			      method: 'put',
+			      url: 'pictures/'+k+'.json',
+			      data: { 'picture' : {'thumb_x' : values.x, 'thumb_y': values.y }, 
+			      'authenticity_token' : 'DhZhtf0ky7xQJBquvdl2PWzi2Fi1z+GkiVmQPdXP7fo='},
+			      onRequest: function() { alert('Request made. Please wait...'); },
+			      onComplete: function(response) { alert('Response: ' + response); }
+			    }).send();
+		       
+		    },
+		    initialposition: {x: 0, y: 0},
+		    minsize: {x: <%= Constant.find_by_name('minwidth_thumb').value %>, y: <%= Constant.find_by_name('minheight_thumb').value %>},
+		    maxratio: {x: 2, y: 1},
+		    fixedratio: false,
+		    cropframe:'cropframe_'+k,                                                                                
+		    imgframe:'imglayer_'+k,
+		    cropdims:'cropdims_'+k,
+		    cropbtn:'cropbtn_'+k,
+		    draghandle:'draghandle_'+k,
+		    resizehandle:'resizeHandleXY_'+k                                                                                                               
+		});
+	});
+	
+
+});
+</script>
+
 <h1>Listing pictures</h1>
 <br/>
 
@@ -15,8 +54,24 @@
   </tr>
 
 <% @pictures.each do |picture| %>
+<script>
+	array_pictures[i]='<%= picture.id %>';
+	i++;
+</script>
   <tr>  
-    <td><img class='thumb' src="<%= picture.thumb_url %>"/></td>
+    <td>
+    	<div id="imgouter_<%= picture.id %>" class="imgouter">
+	    	<div class="cropframe" id="cropframe_<%= picture.id %>" style="background-image: url('<%= picture.thumb_url %>');width:220px;height:140px;">
+				<div id="draghandle_<%= picture.id %>" class="draghandle"></div>
+				<div id="resizeHandleXY_<%= picture.id %>" class="resizeHandleXY resizeHandle"></div>
+				<div id="cropinfo_<%= picture.id %>" class="cropinfo" rel="Click to crop">
+					<div id="cropbtn_<%= picture.id %>" title="Click to crop" class="cropbtn"></div>
+					<div id="cropdims_<%= picture.id %>" class="cropdims">200x140</div>
+				</div>
+			</div>
+			<div class="imglayer" id="imglayer_<%= picture.id %>" style="background-image: url('<%= picture.thumb_url %>');width:220px;height:146px;" ></div>			
+		</div>
+	</td>
     <td><%= picture.title %></td>
     <td><%= picture.caption %></td>
     <td>
