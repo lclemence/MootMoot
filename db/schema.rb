@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120514045616) do
+ActiveRecord::Schema.define(:version => 20120520210720) do
 
   create_table "categorizations", :force => true do |t|
     t.integer  "gallery_id"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20120514045616) do
     t.string   "thumb_url"
     t.integer  "thumb_width"
     t.integer  "thumb_height"
+    t.integer  "thumb_x"
+    t.integer  "thumb_y"
   end
 
   create_table "roles", :force => true do |t|
