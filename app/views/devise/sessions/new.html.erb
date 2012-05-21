@@ -30,14 +30,15 @@
 
 </div>
 
-    <script src="http://connect.facebook.net/en_US/all.js"></script>
-    <script>
-      FB.init({
-        appId: "<%=Facebook.config[:client_id]%>",
-        cookie: true,
-        xfbml: true,
-        oauth: true
-      });
-    </script>
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <script>
+    FB.init({
+      appId: "<%=Facebook.config[:client_id]%>",
+      cookie: true,
+      xfbml: true,
+      oauth: true
+    });
+  </script>
 
+  <div id="fb-root"></div>
 
