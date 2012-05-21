@@ -1,5 +1,8 @@
 public/
 log/development.log
+config/deploy.rb~
+config/environments/production.rb~
+config/facebook.yml~
 db/development.sqlite3
 app/assets/javascripts/lib.js~
 tmp/*
