@@ -36,7 +36,7 @@ Dir.glob(repository+"/**/*").each do |file|
        
       pic = Picture.create(:url => cdn_filename, :thumb_url => thumb_url, :title => "test title", :caption => "test caption" )
      
-      Categorization.create(:gallery => gal, :picture =>pic, :order => i)
+      Categorization.create(:gallery => Gallery.all.sample, :picture =>pic, :order => i)
       #Categorization.create(:gallery_id => gal.id, :picture_id =>pic.id)
       i=i+1
     end
