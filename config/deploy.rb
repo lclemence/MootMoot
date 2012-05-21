@@ -6,7 +6,7 @@ require "bundler/capistrano"
 # set :normalize_asset_timestamps, false
 
 role :web, "laguillotine.fr"
-role :db, "laguillotine.fr"
+role :db, "laguillotine.fr", :primary => true
 
 
 set :application, "mootmoot"
@@ -14,9 +14,6 @@ set :application, "mootmoot"
 set :keep_releases, 5
 set :scm, :git
 set :repository, "git@github.com:lclemence/MootMoot.git"
-set :deploy_to, '/var/www/%s' % application
-
-
 
 set :user, 'gitdeploy'
 set :use_sudo, false
