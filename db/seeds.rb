@@ -8,6 +8,10 @@
 Constant.create(:name => 'project', :value => 'Julien Pellet')
 Constant.create(:name => 'minwidth_thumb', :value => '200')
 Constant.create(:name => 'minheight_thumb', :value => '140')
+Constant.create(:name => 'cdn_base_url', :value => 'xxx.cloudfront.com')
+Constant.create(:name => 'cdn_key_id', :value => 'cdn_key')
+Constant.create(:name => 'cdn_key_secret', :value => 'cdn_secret')
+
 
 Gallery.delete_all
 gal = Gallery.create(:name => "WELLINGTON")
