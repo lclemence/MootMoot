@@ -1,6 +1,7 @@
 public/
 log/development.log
 db/development.sqlite3
+app/assets/javascripts/lib.js~
 tmp/*
 s/*
 Gemfile~
