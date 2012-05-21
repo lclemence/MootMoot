@@ -1,5 +1,15 @@
 class GalleriesController < ApplicationController
-  before_filter :verify_admin
+  before_filter :verify_admin, :except => :view
+
+  def view
+    @galleries = Gallery.all
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @galleries.to_json(:include => {:pictures => {}}) }
+    end
+  end
+
 
   # GET /galleries
   # GET /galleries.json
@@ -46,7 +56,7 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.save
-        format.html { redirect_to @gallery, :notice => 'Gallery was successfully created.' }
+        format.html { redirect_to galleries_path, :notice => 'Gallery was successfully created.' }
         format.json { render :json => @gallery, :status => :created, :location => @gallery }
       else
         format.html { render :action => "new" }
@@ -62,7 +72,7 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
-        format.html { redirect_to @gallery, :notice => 'Gallery was successfully updated.' }
+        format.html { redirect_to galleries_path, :notice => 'Gallery was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }

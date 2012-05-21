@@ -164,7 +164,7 @@ var PelletStudio = {
 
 
 		var ajax = new Request.JSON( {
-			url : 'gallery.json',
+			url : 'gallery-data.json',
 			method: 'get',
 			encoding: 'utf-8',
 			onSuccess: parseGalleryJSON

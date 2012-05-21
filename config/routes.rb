@@ -6,7 +6,7 @@ Mootmoot::Application.routes.draw do
   root :to => "home#index"
   match 'facebook' => 'home#fb_auth'
 
-  match 'gallery' => 'gallery#view'
+  match 'gallery-data' => 'galleries#view'
   
   resources :pictures
   
