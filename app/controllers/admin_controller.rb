@@ -4,6 +4,9 @@ class AdminController < ApplicationController
   def index
   end
   
+  def users
+  end
+
   def editparams
      constants = params[:value_constants]
      Constant.delete_all

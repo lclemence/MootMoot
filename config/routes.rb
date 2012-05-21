@@ -12,7 +12,8 @@ Mootmoot::Application.routes.draw do
   
   resources :galleries
   
-  match 'admin' => 'admin#index'  
+  match 'admin' => 'admin#index'
+  match 'users' => 'admin#users'  
 
   match 'upload' => 'pictures#upload'
   
