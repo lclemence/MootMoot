@@ -51,10 +51,19 @@ function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,ga
 	this.galleryId=galleryId;
 };
 
-var addImage = function(src,id,title) {
+var addImage = function(src,id,position_x,position_y,title) {	
 	var li     = new Element('li', {'class': 'thumb-page'});
 	var link   = new Element('a', {'class': 'thumb-link','href': '#!'+id}).inject(li);
-	var thumb    = new Element('img', {'id':id,'src': src,'class':'mini'}).inject(link);
+	//var thumb    = new Element('img', {'id':id,'src': src,'class':'mini'}).inject(link);
+	
+	var thumb    = new Element('div', {'id':id,'class':'mini'});
+	thumb.style.backgroundImage='url('+src+')';
+	thumb.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
+	thumb.style.backgroundRepeat='no-repeat';
+	thumb.style.width='220px';
+	thumb.style.height='140px';
+	
+	thumb.inject(link);
 	var footer = new Element('span').inject(thumb,'after');
 	footer.addClass('title');
 	//footer.set('text', title);
@@ -131,13 +140,14 @@ var PelletStudio = {
 							src_thumb=picture.thumb_url;
 							title=picture.title;
 							caption=picture.caption;
-							
-	
+							position_x=(picture.thumb_x == '' ? 0 : parseInt(picture.thumb_x));
+							position_y=(picture.thumb_y == '' ? 0 : parseInt(picture.thumb_y));
+
 							//galleryStorage[gallery.id][id]=
 							galleryStorage[Gname][id]=							
 								new galleryUnit(
 									id,
-									addImage(src_thumb,id),
+									addImage(src_thumb,id,position_x,position_y),
 									src,
 	                				src_thumb,
 									title,
@@ -412,7 +422,10 @@ After the first 20kms a $1 per km travel charge may apply.\
 			var container = new Element('div', {'class': 'thumb-roll-container','id': 'roll-'+id});//.inject(li);;
 			var link   = new Element('a', {'class': 'thumb-roll','href': '#!'+id}).inject(container);
 
-			var thumb = picture.imageDOM.getElementsByTagName('img')[0].clone(true,true).inject(link);
+			var thumb_origin=picture.imageDOM.getElementsByTagName('div')[0];			
+			var thumb_new = thumb_origin.clone(true,true);			
+			thumb_new.style.backgroundSize='124px 75px';
+			var thumb = thumb_new.inject(link);
 
 			var footer = new Element('span').inject(thumb,'after');
 			footer.addClass('title');

@@ -87,10 +87,12 @@ class GalleriesController < ApplicationController
     @gallery = Gallery.find(params[:id])
     @gallery.destroy
 
-    respond_to do |format|
-      format.html { redirect_to galleries_url }
-      format.json { head :no_content }
-    end
+    render :nothing => true
+    #respond_to do |format|
+      
+      #format.html { redirect_to galleries_url }
+      #format.json { head :no_content }
+    #end
   end  
   
   def add_pictures_to_gallery
