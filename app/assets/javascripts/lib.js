@@ -37,7 +37,7 @@ var displayData = {
 var galleryStorage = new Array();
 var galleryData = new Array();
 var picturesArray = new Array();
-function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,galleryId,galleryName) {
+function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,galleryId,galleryName,thumb_height,thumb_width) {
 	this.id = id;
 	this.imageDOM = image;
 	this.src = src;
@@ -49,6 +49,8 @@ function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,ga
 	this.position=position;
 	this.galleryName=galleryName;
 	this.galleryId=galleryId;
+	this.thumb_height=thumb_height;
+	this.thumb_width=thumb_width;
 };
 
 var addImage = function(src,id,position_x,position_y,title) {	
@@ -154,7 +156,9 @@ var PelletStudio = {
 									next,
 									p_index,
 									gallery.id,
-									gallery.name
+									gallery.name,
+                  picture.thumb_height,
+                  picture.thumb_width
 							)
 							//picturesArray[id]=galleryStorage[gallery.id][id];
 							picturesArray[id]=galleryStorage[Gname][id];							
@@ -423,6 +427,7 @@ After the first 20kms a $1 per km travel charge may apply.\
 			var thumb_origin=picture.imageDOM.getElementsByTagName('div')[0];			
 			var thumb_new = thumb_origin.clone(true,true);			
 			thumb_new.style.backgroundSize='124px 75px';
+console.log(picture)
 			var thumb = thumb_new.inject(link);
 
 			var footer = new Element('span').inject(thumb,'after');
