@@ -1,5 +1,12 @@
 <div class="auth-container">
   <h2><%=t :sign_in%></h2><br/>
+
+   <%if notice%>
+     <div class="notice"><%= notice %></div>
+   <%elsif alert%>
+     <div class="alert"><%= alert %></div>
+    <%end%>
+
   <div class="devise-auth">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
       <div><%= f.label :email,(t :email) %>
