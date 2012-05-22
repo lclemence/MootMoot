@@ -37,7 +37,7 @@ var displayData = {
 var galleryStorage = new Array();
 var galleryData = new Array();
 var picturesArray = new Array();
-function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,galleryId,galleryName,thumb_height,thumb_width) {
+function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,galleryId,galleryName,thumb_height,thumb_width,position_x,position_y) {
 	this.id = id;
 	this.imageDOM = image;
 	this.src = src;
@@ -51,6 +51,8 @@ function galleryUnit(id,image, src,src_thumb,title,caption,last,next,position,ga
 	this.galleryId=galleryId;
 	this.thumb_height=thumb_height;
 	this.thumb_width=thumb_width;
+	this.position_x=position_x;
+	this.position_y=position_y;
 };
 
 var addImage = function(src,id,position_x,position_y,title) {	
@@ -158,7 +160,9 @@ var PelletStudio = {
 									gallery.id,
 									gallery.name,
                   picture.thumb_height,
-                  picture.thumb_width
+                  picture.thumb_width,
+                  position_x,
+                  position_y
 							)
 							//picturesArray[id]=galleryStorage[gallery.id][id];
 							picturesArray[id]=galleryStorage[Gname][id];							
@@ -425,8 +429,19 @@ After the first 20kms a $1 per km travel charge may apply.\
 			var link   = new Element('a', {'class': 'thumb-roll','href': '#!'+id}).inject(container);
 
 			var thumb_origin=picture.imageDOM.getElementsByTagName('div')[0];			
-			var thumb_new = thumb_origin.clone(true,true);			
-			thumb_new.style.backgroundSize='124px 75px';
+			var thumb_new = thumb_origin.clone(true,true);
+      if (picture.thumb_width==220) {
+        bg_size="124px "+(picture.thumb_height*124/220)+"px"
+        position_x = 0;
+        position_y = picture.position_y*124/220;
+      }
+      else {
+        bg_size=(picture.thumb_width*75/140)+"px 75px"
+        position_x = picture.position_x*75/140;
+        position_y = 0;
+      }
+			thumb_new.style.backgroundSize=bg_size;
+    	thumb_new.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
 console.log(picture)
 			var thumb = thumb_new.inject(link);
 
