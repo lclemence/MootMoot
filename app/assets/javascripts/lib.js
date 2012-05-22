@@ -64,6 +64,8 @@ var addImage = function(src,id,position_x,position_y,title) {
 	thumb.style.backgroundImage='url('+src+')';
 	thumb.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
 	thumb.style.backgroundRepeat='no-repeat';
+	thumb.style.width='220px';
+	thumb.style.height='140px';
 	
 	thumb.inject(link);
 	var footer = new Element('span').inject(thumb,'after');
@@ -289,7 +291,7 @@ var PelletStudio = {
 		if ($('pic-frame')) {
 			var myFx = new Fx.Tween('pic-frame', {property: 'opacity',duration:'long'});
 			myFx.start(1,0).chain(function(){
-				$('pic-frame').empty();
+				//$('pic-frame').empty();
 				Element('img', {'id':"p"+picture.id,'src': picture.src,'class':'pic'}).inject($('pic-frame'));
 				this.start(0,1).chain(
 				    function(){ 
@@ -430,18 +432,23 @@ After the first 20kms a $1 per km travel charge may apply.\
 
 			var thumb_origin=picture.imageDOM.getElementsByTagName('div')[0];			
 			var thumb_new = thumb_origin.clone(true,true);
-      if (picture.thumb_width==220) {
-        bg_size="124px "+(picture.thumb_height*124/220)+"px"
-        position_x = 0;
-        position_y = picture.position_y*124/220;
-      }
-      else {
-        bg_size=(picture.thumb_width*75/140)+"px 75px"
-        position_x = picture.position_x*75/140;
-        position_y = 0;
-      }
+		      if (picture.thumb_width==220) {
+		        bg_size="124px "+(picture.thumb_height*124/220)+"px";
+		        position_x = 0;
+		        position_y = picture.position_y*124/220;
+		        thumb_new.style.height=(picture.thumb_height*124/220)+'px';
+		        thumb_new.style.width='124px';
+		      }
+		      else {
+		        bg_size=(picture.thumb_width*75/140)+"px 75px";
+		        position_x = picture.position_x*75/140;
+		        position_y = 0;
+		        thumb_new.style.height='75 px';
+		        thumb_new.style.width=(picture.thumb_width*75/140)+'px';
+		      }
+		   
 			thumb_new.style.backgroundSize=bg_size;
-    	thumb_new.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
+    		thumb_new.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
 			var thumb = thumb_new.inject(link);
 
 			var footer = new Element('span').inject(thumb,'after');
