@@ -2,6 +2,7 @@ Mootmoot::Application.routes.draw do
   resources :constants
 
   devise_for :users
+  resources :users
 
   root :to => "home#index"
   match 'facebook' => 'home#fb_auth'
@@ -13,7 +14,6 @@ Mootmoot::Application.routes.draw do
   resources :galleries
   
   match 'admin' => 'admin#index'
-  match 'users' => 'admin#users'  
 
   match 'upload' => 'pictures#upload'
   

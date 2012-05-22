@@ -17,3 +17,4 @@ en:
   confirm_new_password: "Confirm new password"
   change_password_button: "Change my password"
   not_allowed: "You are not allowed to access this website."
+  new_user_button: "Create new user"
