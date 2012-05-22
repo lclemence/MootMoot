@@ -19,9 +19,11 @@ Gallery.create(:name => "Nature")
 Gallery.create(:name => "Portrait")
 Gallery.create(:name => "Fine Art")
 
-User.new({:email => "toto@gmail.com", :password => "chartreuse", :password_confirmation => "chartreuse" }).save
+password = Devise.friendly_token[0,20])
+User.new({:email => "toto@gmail.com", :password => password, :password_confirmation => password }).save
 
-User.new({:email => "pelletj@gmail.com", :password => "chartreuse", :password_confirmation => "chartreuse" }).save 
+password = Devise.friendly_token[0,20])
+User.new({:email => "pelletj@gmail.com", :password => password, :password_confirmation => password }).save 
 User.last.add_role :admin
 #Role.create({:name => "admin"}).save
 

@@ -17,6 +17,7 @@ fr:
   confirm_new_password: "Confirmez le nouveau mot de passe"
   change_password_button: "Changer mon mot de passe"
   not_allowed: "Vous n'êtes pas autorisé à accéder a ce site."
+  new_user_button: "Créer nouveau utilisateur"
 
   activerecord:
     errors:
