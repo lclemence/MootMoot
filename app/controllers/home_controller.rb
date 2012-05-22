@@ -28,7 +28,7 @@ class HomeController < ApplicationController
           env['warden'].set_user(user)
         end
       else
-        redirect_to new_user_session_path, :alert =>"You fool!@"
+        redirect_to new_user_session_path, :alert =>t(:not_allowed)
       end
 
       redirect_to root_url
