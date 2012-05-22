@@ -442,7 +442,6 @@ After the first 20kms a $1 per km travel charge may apply.\
       }
 			thumb_new.style.backgroundSize=bg_size;
     	thumb_new.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
-console.log(picture)
 			var thumb = thumb_new.inject(link);
 
 			var footer = new Element('span').inject(thumb,'after');
