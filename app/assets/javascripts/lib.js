@@ -60,8 +60,6 @@ var addImage = function(src,id,position_x,position_y,title) {
 	thumb.style.backgroundImage='url('+src+')';
 	thumb.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
 	thumb.style.backgroundRepeat='no-repeat';
-	thumb.style.width='220px';
-	thumb.style.height='140px';
 	
 	thumb.inject(link);
 	var footer = new Element('span').inject(thumb,'after');
@@ -234,7 +232,7 @@ var PelletStudio = {
 //			Asset.css('../css/smallScreen.css', {id: 'myStyle', title: 'myStyle'});
 //			galleryState.maxPicsInRoll=5;
 		} else if (displayData.screenWidth-displayData.menuSize>1300) {
-			Asset.css('../css/wideScreen.css', {id: 'myStyle', title: 'myStyle'});
+//			Asset.css('../css/wideScreen.css', {id: 'myStyle', title: 'myStyle'});
 //			galleryState.maxPicsInRoll=5;
 		} 
 	},//TODO change hardcode

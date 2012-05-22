@@ -143,9 +143,14 @@ user-select: none;
 
 
 
+#thumb-roll-container{
+	width:124px;
+	height:75px;
+}
+
 #roll{
 	width:940px;
-	height:70px;
+	height:80px;
 	margin-left:-20px;
 	margin-bottom:5px;
 	overflow:hidden;
@@ -193,7 +198,7 @@ user-select: none;
 }
 
 .thumb-roll-container{
-	display:inline;
+	display:inline-block;
 }
 
 #initiales {bottom:0%;right:0%;position:fixed;z-index:2;width:100px;}
