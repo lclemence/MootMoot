@@ -11,3 +11,8 @@ fr:
   remember_me: "Connexion automatique"
   sign_in_button: "Se connecter"
   forgot_password: "Mot de passe oublié ?"
+  send_reset_instruction: "Envoyer les instructions pour réinitialiser le mot de passe"
+  change_password: "Changez votre mot de passe"
+  new_password: "Nouveau mot de passe"
+  confirm_new_password: "Confirmez le nouveau mot de passe"
+  change_password_button: "Changer mon mot de passe"

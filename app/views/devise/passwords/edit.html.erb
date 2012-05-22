@@ -1,17 +1,17 @@
 <div class="auth-container">
-  <h2>Change your password</h2>
+  <h2><%=t(:change_password)%></h2>
   <br/>
   <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
     <%= devise_error_messages! %>
     <%= f.hidden_field :reset_password_token %>
 
-    <div><%= f.label :password, "New password" %>
+    <div><%= f.label :password, t(:new_password) %>
     <%= f.password_field :password %></div>
 
-    <div><%= f.label :password_confirmation, "Confirm new password" %>
+    <div><%= f.label :password_confirmation, t(:confirm_new_password) %>
     <%= f.password_field :password_confirmation %></div>
     <br/>
-    <div><%= f.submit "Change my password",:class => "btn btn-primary" %></div>
+    <div><%= f.submit t(:change_password_button),:class => "btn btn-primary" %></div>
   <% end %>
 
   <%= render "links" %>
