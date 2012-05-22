@@ -3,3 +3,11 @@
 
 en:
   hello: "Hello world"
+  or: "OR"
+  login_with_fb: "Log in with Facebook"
+  sign_in: "Sign in"
+  email: "Email"
+  password: "Password"
+  remember_me: "Remember me"
+  sign_in_button: "Sign in"
+  forgot_password: "Forgot your password ?"

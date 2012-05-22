@@ -1,18 +1,18 @@
 <div class="auth-container">
-  <h2>Sign in</h2><br/>
+  <h2><%=t :sign_in%></h2><br/>
   <div class="devise-auth">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-      <div><%= f.label :email %>
+      <div><%= f.label :email,(t :email) %>
       <%= f.email_field :email %></div>
 
-      <div><%= f.label :password %>
+      <div><%= f.label :password,(t :password) %>
       <%= f.password_field :password %></div>
 
       <% if devise_mapping.rememberable? -%>
-        <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+        <div><%= f.check_box :remember_me %> <%= f.label :remember_me,(t :remember_me) %></div>
       <% end -%>
 
-      <div><%= f.submit "Sign in",:class => 'btn-primary' %></div>
+      <div><%= f.submit t(:sign_in_button), :class => 'btn btn-primary' %></div>
     <% end %>
 
     <%= render "links" %>
@@ -20,12 +20,12 @@
 
   <div style='float:left;width:20px;'>
     <div style='width:1px;height:120px;margin-left:9px;background-color:#ccc;'></div>
-    <div style='margin:5px 0 5px 0;'>OR</div>
+    <div style='margin:5px 0 5px 0;'><%=t :or%></div>
     <div style='width:1px;height:120px;margin-left:9px;background-color:#ccc;'></div>
   </div>
 
   <div class="fb-auth">
-    <dd><fb:login-button size="large" length="long" onlogin="location.href = '/facebook'" scope="email"></fb:login-button></dd>
+    <dd><fb:login-button size="large" length="long" onlogin="location.href = '/facebook'" scope="email"><%=t :login_with_fb%></fb:login-button></dd>
   </div>
 
 </div>

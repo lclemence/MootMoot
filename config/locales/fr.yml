@@ -1,0 +1,13 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+fr:
+  hello: "Bonjour monde"
+  or: "OU"
+  login_with_fb: "Se connecter avec Facebook"
+  sign_in: "Connectez-vous"
+  email: "Email"
+  password: "Mot de passe"
+  remember_me: "Connexion automatique"
+  sign_in_button: "Se connecter"
+  forgot_password: "Mot de passe oublié ?"
