@@ -23,7 +23,7 @@ class HomeController < ApplicationController
         if user = User.find_by_email(fb_user.email)
           env['warden'].set_user(user)
         else # Create a user with a stub password.
-          user = User.create(:email => fb_user.email, :password => Devise.friendly_token[0,20])
+          user = User.create(:email => fb_user.email, :password => Devise.friendly_token[0,20], :first_name => fb_user.first_name, :last_name => fb_user.last_name)
           user.save(:validate => false)
           env['warden'].set_user(user)
         end
