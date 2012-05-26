@@ -109,12 +109,8 @@ class PicturesController < ApplicationController
       File.open(Rails.root.join(upload_dir, filename), 'w') do |file|
         file.write(uploaded_io.read)
       end
-      md5 = Digest::MD5.hexdigest(File.read(Rails.root.join(upload_dir, filename)))
+      md5 = Digest::MD5.hexdigest(File.read(File.join(upload_dir, filename)))
       md5_filename = md5 + File.extname(filename) 
-
-      File.rename(Rails.root.join(upload_dir, filename) , Rails.root.join(upload_dir, md5_filename))
-
-     # AWS::S3::S3Object.store(final_filename, open(Rails.root.join(upload_dir, filename)), 'mootmoot')
 
       thumb = resize upload_dir, md5_filename
 
@@ -124,16 +120,13 @@ class PicturesController < ApplicationController
       md5_thumb_filename = md5_thumb + File.extname(filename)
       File.rename(Rails.root.join(upload_dir, 'thumb-'+filename) , Rails.root.join(upload_dir, md5_thumb_filename))
 
-
       Picture.create(
-          :url => '/pictures/' + md5_filename, 
-          :thumb_url => '/pictures/' + md5_thumb_filename, 
+          :url =>  Rails.application.config.action_controller.asset_host.to_s + '/pictures/' + md5_filename, 
+          :thumb_url => Rails.application.config.action_controller.asset_host.to_s + '/pictures/' + md5_thumb_filename, 
           :thumb_width => thumb.columns,
           :thumb_height => thumb.rows,
           :title => "test title", 
           :caption => "test caption" )
-
-      
 
    end
   
