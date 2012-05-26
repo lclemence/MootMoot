@@ -122,6 +122,7 @@ var PelletStudio = {
 			var id=false;
 			var title=false;
 	        Array.each(request, function(gallery, g_index){
+      			var last=false;
 	    			//galleryStorage[gallery.id]=new Array();
 	    			var Gname=trim(gallery.name).toUpperCase();	    			
 	    			galleryStorage[Gname]=new Array();	    			
@@ -291,7 +292,7 @@ var PelletStudio = {
 		if ($('pic-frame')) {
 			var myFx = new Fx.Tween('pic-frame', {property: 'opacity',duration:'long'});
 			myFx.start(1,0).chain(function(){
-				//$('pic-frame').empty();
+				$('pic-frame').empty();
 				Element('img', {'id':"p"+picture.id,'src': picture.src,'class':'pic'}).inject($('pic-frame'));
 				this.start(0,1).chain(
 				    function(){ 
@@ -448,7 +449,7 @@ After the first 20kms a $1 per km travel charge may apply.\
 		      }
 		   
 			thumb_new.style.backgroundSize=bg_size;
-    		thumb_new.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
+      thumb_new.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
 			var thumb = thumb_new.inject(link);
 
 			var footer = new Element('span').inject(thumb,'after');

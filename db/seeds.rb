@@ -21,13 +21,13 @@ Gallery.create(:name => "Fine Art")
 
 User.new({:email => "toto@gmail.com", :password => "password", :password_confirmation => "password" }).save
 
-password = Devise.friendly_token[0,20])
+password = Devise.friendly_token[0,20]
 User.new({:email => "pelletj@gmail.com", :password => password, :password_confirmation => password }).save 
-User.last.add_role :admin
+User.find_by_email("pelletj@gmail.com").add_role :admin
 #Role.create({:name => "admin"}).save
 
-#repository = "/home/jpellet/DEV/julienpellet.com-php/gallery/all"
-repository = "/home/clemence/Pictures/all"
+repository = "/home/jpellet/DEV/julienpellet.com-php/gallery/all"
+#repository = "/home/clemence/Pictures/all"
 Categorization.delete_all
 Picture.delete_all
 i=0
@@ -39,7 +39,15 @@ Dir.glob(repository+"/**/*").each do |file|
     if !cdn_filename['thumb']
       thumb_url = cdn_filename.gsub('images','thumbs')
        
-      pic = Picture.create(:url => cdn_filename, :thumb_url => thumb_url, :title => "test title", :caption => "test caption" )
+      pic = Picture.create(
+        :url => cdn_filename, 
+        :thumb_url => thumb_url, 
+        :title => "test title", 
+        :caption => "test caption", 
+        :thumb_width => "220",
+        :thumb_height => "140", 
+        :thumb_x => "0",
+        :thumb_y => "0")
      
       Categorization.create(:gallery => Gallery.all.sample, :picture =>pic, :order => i)
       #Categorization.create(:gallery_id => gal.id, :picture_id =>pic.id)
