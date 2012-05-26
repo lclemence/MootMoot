@@ -8,6 +8,8 @@ gem 'rails', '3.2.3'
 gem 'sqlite3'
 gem 'mysql2'
 
+gem 'http_accept_language'
+
 gem 'json'
 
 gem 'execjs' 

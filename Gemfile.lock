@@ -53,6 +53,7 @@ GEM
       rack-oauth2 (>= 0.14.4)
       tzinfo
     hike (1.2.1)
+    http_accept_language (1.0.2)
     httpclient (2.2.4)
     i18n (0.6.0)
     journey (1.0.3)
@@ -137,6 +138,7 @@ DEPENDENCIES
   devise
   execjs
   fb_graph
+  http_accept_language
   jquery-rails
   json
   mysql2

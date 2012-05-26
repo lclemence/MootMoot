@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   layout :layout_by_role
    
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    available = %w{en fr}
+    I18n.locale = request.compatible_language_from(available)
   end
 
 
