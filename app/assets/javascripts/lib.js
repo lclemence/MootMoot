@@ -86,14 +86,16 @@ function loadGallery(gallery) {
 }
 
 function initMouseOverThumb(){
-	Array.each($$('img.mini'), function(thumb, index){
+	Array.each($$('div.mini'), function(thumb, index){
 	thumb.set('tween', {transition: Fx.Transitions.Quint.easeOut, duration:500});
 		  thumb.addEvents({
 		    mouseenter: function(){
-				thumb.tween('padding-top', 15);
-			},
+				  thumb.tween('margin-top', -3);
+          thumb.style.boxShadow="2px 2px 2px #444"
+			  },
 		    mouseout: function(){
-				thumb.tween('padding-top', 0);
+  				thumb.tween('margin-top', 0);
+          thumb.style.boxShadow=""
 			},
 		    click:function(){
 //				PelletStudio.displayPic(thumb.id);
