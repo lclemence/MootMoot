@@ -437,17 +437,14 @@ After the first 20kms a $1 per km travel charge may apply.\
 		        bg_size="124px "+(picture.thumb_height*124/220)+"px";
 		        position_x = 0;
 		        position_y = picture.position_y*124/220;
-		        thumb_new.style.height=(picture.thumb_height*124/220)+'px';
-		        thumb_new.style.width='124px';
 		      }
 		      else {
 		        bg_size=(picture.thumb_width*75/140)+"px 75px";
 		        position_x = picture.position_x*75/140;
 		        position_y = 0;
-		        thumb_new.style.height='75 px';
-		        thumb_new.style.width=(picture.thumb_width*75/140)+'px';
 		      }
-		   
+		  thumb_new.style.height='75 px';
+		  thumb_new.style.width='124px';
 			thumb_new.style.backgroundSize=bg_size;
       thumb_new.style.backgroundPosition='-'+position_x+'px -'+position_y+'px';
 			var thumb = thumb_new.inject(link);
