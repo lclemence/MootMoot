@@ -24,14 +24,14 @@ CwCrop = new Class({
 	Implements: [Options,Events],
 
 	options: {
-		minsize: {x: 60, y: 60}, // minimal size of the resulting image
-		maxsize: {x: 200, y: 200}, // maximal size of the resulting image
+		minsize: {x: 220, y: 140}, // minimal size of the resulting image
+		maxsize: {x: 220, y: 140}, // maximal size of the resulting image
 		originalsize: {x: 1, y: 1}, // size of the original image (if the crop area uses a smaller version)
 
 		fixedratio: false, // if set to a number, use this as a fixed ratio (and ignore maxratio)
 		maxratio: {x: 2, y: 2}, // maximum ratio x, y
 
-		initialposition: {x: 10, y: 10}, // initial position (in the crop area)
+		initialposition: {x: 0, y: 0}, // initial position (in the crop area)
 		initialmax: false, // extend the crop area initially to the maximum size
 
 		classactive: "active", // css classname for the crop frame if the user moves/resizes

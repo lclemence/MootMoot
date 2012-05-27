@@ -14,7 +14,7 @@ window.addEvent('domready', function() {
 			      method: 'put',
 			      url: 'pictures/'+k[0]+'.json',
 			      data: { 'picture' : {'thumb_x' : values.x, 'thumb_y': values.y }, 
-			      'authenticity_token' : 'DhZhtf0ky7xQJBquvdl2PWzi2Fi1z+GkiVmQPdXP7fo='},
+			      'authenticity_token' : '<%= form_authenticity_token.to_s %>'},
 			      onRequest: function() { alert('Request made. Please wait...'); },
 			      onComplete: function(response) { alert('Response: ' + response); }
 			    }).send();
@@ -64,15 +64,15 @@ window.addEvent('domready', function() {
   <tr>  
     <td>
     	<div id="imgouter_<%= picture.id %>" class="imgouter">
-	    	<div class="cropframe" id="cropframe_<%= picture.id %>" style="background-image: url('<%= picture.thumb_url %>');width:220px;height:140px;">
+	    	<div class="cropframe" id="cropframe_<%= picture.id %>" style="background-image: url('<%= picture.thumb_url %>');width:<%=picture.thumb_width%>px;height:<%=picture.thumb_height%>px;">
 				<div id="draghandle_<%= picture.id %>" class="draghandle"></div>
 				<div id="resizeHandleXY_<%= picture.id %>" class="resizeHandleXY resizeHandle"></div>
 				<div id="cropinfo_<%= picture.id %>" class="cropinfo" rel="Click to crop">
 					<div id="cropbtn_<%= picture.id %>" title="Click to crop" class="cropbtn"></div>
-					<div id="cropdims_<%= picture.id %>" class="cropdims">200x140</div>
+					<div id="cropdims_<%= picture.id %>" class="cropdims">220x140</div>
 				</div>
 			</div>
-			<div class="imglayer" id="imglayer_<%= picture.id %>" style="background-image: url('<%= picture.thumb_url %>');width:220px;height:146px;" ></div>			
+			<div class="imglayer" id="imglayer_<%= picture.id %>" style="background-image: url('<%= picture.thumb_url %>');width:<%=picture.thumb_width%>px;height:<%=picture.thumb_height%>px;" ></div>
 		</div>
 	</td>
     <td><%= picture.title %></td>
