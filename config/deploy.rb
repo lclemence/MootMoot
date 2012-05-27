@@ -45,14 +45,8 @@ end
 
 namespace :assets do
   task :post_release do
-
 # move CSS and JS to CDN here
-
 #    run "rm -f #{latest_release}/config/initializers/cdn_path.rb && ln -nfs #{shared_path}/config/cdn_path.rb #{latest_release}/config/initializers/cdn_path.rb"
-
-#    run "rm -rf #{latest_release}/public/ && ln -s /var/www/fedex-frontend-#{rails_env}/current/ #{latest_release}/public"
-#    run "ln -s #{shared_path}/assets #{latest_release}/public/assets"
-
   end
 end
 
@@ -60,8 +54,9 @@ end
 # Tasks for Database configuration
 namespace :db do
   task :symlink do
-    desc "Make symlink for the database yaml"
+    desc "Make symlink for the database yaml / pictures folder"
     run "ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
+    run "ln -nfs #{shared_path}/pictures #{latest_release}/public/pictures"
 
 #    desc "Make symlink for assets config file"
 #    run "rm -f #{latest_release}/config/initializers/constants.rb && ln -nfs #{shared_path}/config/constants.rb #{latest_release}/config/initializers/constants.rb"
