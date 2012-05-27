@@ -24,6 +24,7 @@ Mootmoot::Application.configure do
   config.assets.digest = true
 
   #one year cache 
+  config.assets.version = "1.1"
   config.static_cache_control = "public, max-age=31536000"
 
   # Defaults to Rails.root.join("public/assets")
