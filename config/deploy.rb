@@ -99,7 +99,6 @@ namespace :apache2 do
    ServerName #{vhost_hostname}
    ServerAlias #{vhost_hostname}
    DocumentRoot #{current_path}/public/
-#   DefaultInitEnv RAILS_ENV production
    RackEnv #{rails_env}
    Options -MultiViews
    <Directory #{current_path}/public/>
@@ -108,6 +107,13 @@ namespace :apache2 do
       Order allow,deny
       Allow from all
    </Directory>
+  <LocationMatch "^/assets/.*$">
+#    # 1 year cache for assets -- requires mod_expires
+#    FileETag None
+#    # RFC says only cache for 1 year
+#    ExpiresActive On
+#    ExpiresDefault "access plus 1 year"
+#  </LocationMatch>
 </VirtualHost>
 EOF
     put template, "/etc/apache2/sites-enabled/#{application}-#{rails_env}_vhost.conf"
