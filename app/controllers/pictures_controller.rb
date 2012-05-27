@@ -112,13 +112,15 @@ class PicturesController < ApplicationController
       md5 = Digest::MD5.hexdigest(File.read(File.join(upload_dir, filename)))
       md5_filename = md5 + File.extname(filename) 
 
+      File.rename(File.join(upload_dir, filename) , File.join(upload_dir, md5_filename))
+
       thumb = resize upload_dir, md5_filename
 
       thumb.write(File.join(upload_dir, 'thumb-'+filename))
 
       md5_thumb = Digest::MD5.hexdigest(File.read(Rails.root.join(upload_dir, 'thumb-'+filename)))
       md5_thumb_filename = md5_thumb + File.extname(filename)
-      File.rename(Rails.root.join(upload_dir, 'thumb-'+filename) , Rails.root.join(upload_dir, md5_thumb_filename))
+      File.rename(File.join(upload_dir, 'thumb-'+filename) , File.join(upload_dir, md5_thumb_filename))
 
       Picture.create(
           :url =>  Rails.application.config.action_controller.asset_host.to_s + '/pictures/' + md5_filename, 
