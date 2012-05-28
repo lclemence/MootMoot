@@ -112,11 +112,12 @@ namespace :apache2 do
       Order allow,deny
       Allow from all
    </Directory>
-    # 1 year cache for assets -- requires mod_expires
-    FileETag None
-    # RFC says only cache for 1 year
-    ExpiresActive On
-    ExpiresDefault "access plus 1 year"
+   <LocationMatch>
+     # 1 year cache for assets -- requires mod_expires
+     FileETag None
+     # RFC says only cache for 1 year
+     ExpiresActive On
+     ExpiresDefault "access plus 1 year"
   </LocationMatch>
 </VirtualHost>
 EOF
