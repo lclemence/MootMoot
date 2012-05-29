@@ -1,7 +1,11 @@
 class HomeController < ApplicationController
-  before_filter :authenticate_user!, :except => [:fb_auth]
-
   def index
+    if params['_escaped_fragment_']
+      @picture = Picture.find_by_id(params['_escaped_fragment_'])
+      render "escaped_fragment"
+    elsif !current_user
+      redirect_to new_user_session_path
+    end
   end
 
   def fb_auth
