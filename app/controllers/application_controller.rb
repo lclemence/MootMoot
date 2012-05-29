@@ -19,7 +19,11 @@ class ApplicationController < ActionController::Base
     if current_user && ( current_user.has_role? :admin )
       "admin"
     else
-      "application"
+      if params['_escaped_fragment_']
+        "empty"
+      else
+        "application"
+      end
     end
   end
 end
