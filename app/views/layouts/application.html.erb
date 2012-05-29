@@ -10,6 +10,13 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  
+  <%if @picture%>
+  <meta property="og:title" content="What's this baby" />
+  <meta property="og:description" content="This should be a description of the content" />
+  <meta property="og:image" content="<%=@picture.thumb_url%>" />
+  <%end%>
+
 </head>
 <body>
 
