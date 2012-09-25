@@ -6,6 +6,9 @@ Mootmoot::Application.routes.draw do
 
   match 'gallery-data' => 'galleries#view'
 
+  match 'pictures/:id' => 'pictures#show'
+
+
   namespace :admin do
     root :to => 'dashboard#index'
 
