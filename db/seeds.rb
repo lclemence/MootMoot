@@ -19,11 +19,61 @@ Gallery.create(:name => "Nature")
 Gallery.create(:name => "Portrait")
 Gallery.create(:name => "Fine Art")
 
+
 User.new({:email => "toto@gmail.com", :password => "password", :password_confirmation => "password" }).save
+
+mail = "babette.pellet@gmail.com"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+
+
+
+mail = "pellet@tcokk.com"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "melanie.pellet@gmail.com"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "julien.filliard@gmail.com"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "c.taza@yahoo.fr"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "plelong@cours-ado.com"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "pacome@resn.co.nz"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "pacome@heyrex.com"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "chris371987@gmail.com"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "pacome@frenchkisscafe.co.nz"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "marlene.lesueur@hotmail.fr"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "zoubaron@gmail.com"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+mail = "fhorion@yahoo.fr"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+
+mail = "ybenmati@yahoo.fr"
+User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
+
+Baby.new({ :name => "Pacome" }).save
 
 password = Devise.friendly_token[0,20]
 User.new({:email => "pelletj@gmail.com", :password => password, :password_confirmation => password }).save 
 User.find_by_email("pelletj@gmail.com").add_role :admin
+User.find_by_email("lelongclemence@gmail.com").add_role :admin
 #Role.create({:name => "admin"}).save
 
 repository = "/home/jpellet/DEV/julienpellet.com-php/gallery/all"
