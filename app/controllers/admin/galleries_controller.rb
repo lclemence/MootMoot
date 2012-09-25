@@ -46,7 +46,7 @@ class Admin::GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.save
-        format.html { redirect_to galleries_path, :notice => 'Gallery was successfully created.' }
+        format.html { redirect_to admin_galleries_path, :notice => 'Gallery was successfully created.' }
         format.json { render :json => @gallery, :status => :created, :location => @gallery }
       else
         format.html { render :action => "new" }
@@ -62,7 +62,7 @@ class Admin::GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
-        format.html { redirect_to galleries_path, :notice => 'Gallery was successfully updated.' }
+        format.html { redirect_to admin_galleries_path, :notice => 'Gallery was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
