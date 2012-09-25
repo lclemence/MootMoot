@@ -1,0 +1,8 @@
+<h1>Editing gallery</h1>
+
+<%= render 'form' %>
+
+<div class="btn-group">
+	<%= link_to raw('<i class="icon-arrow-left"></i> Back'), admin_galleries_path, :class => 'btn'  %>
+	<%= link_to raw('<i class="icon-eye-open"></i> Show'), admin_galleries_path(@gallery), :class => 'btn'  %>
+</div>

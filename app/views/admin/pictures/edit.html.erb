@@ -1,0 +1,8 @@
+<h1>Editing picture</h1>
+
+<%= render 'form' %>
+
+<div class="btn-group">
+	<%= link_to raw('<i class="icon-arrow-left"></i> Back'), pictures_path, :class => 'btn'  %>
+	<%= link_to raw('<i class="icon-eye-open"></i> Show'), @picture, :class => 'btn'  %>
+</div>

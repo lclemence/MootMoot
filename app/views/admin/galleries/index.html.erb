@@ -1,0 +1,130 @@
+<script>
+function cancel_gallery(gallery_id){
+	$('#modal_gallery_'+gallery_id).modal('hide');
+}
+function gallery_show(gallery_id){
+	$('#modal_gallery_'+gallery_id).modal('show');
+	$('#gallery_right_'+gallery_id).sortable({
+		revert: true
+	});
+	/*$('#gallery_trash').droppable(
+			tolerance: 'touch',	
+            over: function() {
+                   $(this).removeClass('out').addClass('over');
+            },
+            out: function() {
+                    $(this).removeClass('over').addClass('out');
+            },
+            drop: function() {
+                    var answer = confirm('Permantly delete this item?');
+                    $(this).removeClass('over').addClass('out');
+            }
+		
+	);*/
+	
+	$('#gallery_left_'+gallery_id+' li').each(function(key,value){
+		$('#'+value.id).draggable({
+			connectToSortable:'#gallery_right_'+gallery_id,
+			helper:'clone'
+			,revert:'invalid'
+		});		
+		
+	});
+	$( "ul, li" ).disableSelection();
+
+}
+function submit_gallery(gallery_id){
+	$('#form_gallery_'+gallery_id).submit();
+}
+
+$(document).ready(function() {
+	 $('a.delete').live('click', function(event) {
+
+        if ( confirm("Are you sure you want to delete this?") )
+            $.ajax({
+                url: this.href.replace('/delete', ''),
+                type: 'delete',
+                dataType: 'script',
+                data: { '_method': 'delete', 
+                'authenticity_token' : 'DhZhtf0ky7xQJBquvdl2PWzi2Fi1z+GkiVmQPdXP7fo='},
+                success: function() {
+                    // the item has been deleted
+                    // might want to remove it from the interface
+                    // or redirect or reload by setting window.location
+                }
+            });
+
+        return false;
+    });
+	
+});
+</script>
+<h1>Listing galleries</h1>
+<br />
+<%= link_to 'New Gallery', new_admin_gallery_path, :class => 'btn' %>
+<br /><br />
+<table  class="table table-striped table-bordered table-condensed">
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+
+<% @galleries.each do |gallery| %>
+  <tr>
+    <td><%= gallery.name %></td>
+    <td>
+    	<div class="btn-group">
+    		
+    		<a class="btn btn-primary" href="#" onclick="gallery_show(<%= gallery.id%>)"><i class="icon-eye-open icon-white"></i> Show</a>
+    		<%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_admin_gallery_path(gallery), :class => 'btn btn-primary'  %>
+    		<%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), admin_galleries_path(gallery), :confirm => 'Are you sure?', :method => :delete , :class => 'delete btn btn-danger' %>
+    	</div>
+    </td>	
+  </tr>
+<% end %>
+</table>
+
+<% @galleries.each do |gallery| %>
+	<div class="modal" id="modal_gallery_<%= gallery.id%>" style="display: none;width:730px;overflow-x:hidden;">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">
+				×
+			</button>
+			<h3><%= gallery.name%></h3>
+		</div>
+		<div class="modal-body" style="max-height:350px;">			
+			<div style="float:left;width:336px;">
+				<h4>All pictures</h4>
+				<ul id="gallery_left_<%= gallery.id%>" style="width:336px;">					
+					<% Picture.all.each do |picture| %>
+						<li id="left_gallery_<%= gallery.id%>_picture_<%= picture.id%>" class="ui-state-highlight" style="float:left;padding:2px 2px 2px 2px;">
+							<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
+							<input type="hidden" name="pictures[]" value="<%= picture.id%>"/>
+						</li>	
+					<% end %>
+				</ul>
+			</div>
+			<div class="vertical_line"></div>
+			<div style="float:left;width:336px;">
+				<h4>Current pictures</h4>
+				<%=form_tag(admin_picturestogallery_path, :method => "post", :id => "form_gallery_" + gallery.id.to_s, :name => "form_gallery_" + gallery.id.to_s) %>	
+					<input type="hidden" name="gallery_id" value="<%=gallery.id%>"/>			
+					<ul id="gallery_right_<%= gallery.id%>" style="min-height:280px;width:336px;">					
+						<% gallery.pictures.each do |picture| %>
+							<li style="float:left;padding:2px 2px 2px 2px;" class="ui-state-default">
+								<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
+								<input type="hidden" name="pictures[]" value="<%= picture.id%>"/>
+							</li>	
+						<% end %>
+					</ul>					
+					<div id="gallery_trash" class="img-trash" style="float:right;">
+				</form>				
+				</div>
+			</div>						
+		</div>		
+		<div class="modal-footer">
+			<a href="#" class="btn" onclick="cancel_gallery(<%= gallery.id%>)">Cancel</a>
+			<a href="#" class="btn btn-primary" onclick="submit_gallery(<%= gallery.id%>)">Save changes</a>
+		</div>
+	</div>
+<% end %>
