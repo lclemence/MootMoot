@@ -46,11 +46,9 @@ $(document).ready(function() {
                 type: 'delete',
                 dataType: 'script',
                 data: { '_method': 'delete', 
-                'authenticity_token' : 'DhZhtf0ky7xQJBquvdl2PWzi2Fi1z+GkiVmQPdXP7fo='},
+                'authenticity_token' : 'rRbLhnrAX/hAopYDPW3bs2Te/m6/wxot2geZ0P9IVKc='},
                 success: function() {
-                    // the item has been deleted
-                    // might want to remove it from the interface
-                    // or redirect or reload by setting window.location
+                    window.location.reload(); 
                 }
             });
 
@@ -77,7 +75,7 @@ $(document).ready(function() {
     		
     		<a class="btn btn-primary" href="#" onclick="gallery_show(<%= gallery.id%>)"><i class="icon-eye-open icon-white"></i> Show</a>
     		<%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_admin_gallery_path(gallery), :class => 'btn btn-primary'  %>
-    		<%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), admin_galleries_path(gallery), :confirm => 'Are you sure?', :method => :delete , :class => 'delete btn btn-danger' %>
+    		<%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), [:admin, gallery], :confirm => 'Are you sure?', :method => :delete , :class => 'delete btn btn-danger' %>
     	</div>
     </td>	
   </tr>
