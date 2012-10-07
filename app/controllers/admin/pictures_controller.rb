@@ -6,7 +6,6 @@ class Admin::PicturesController < ApplicationController
   def index
 
     if params.has_key?('last')
-     # @pictures = Picture.find(:all, :conditions => ['id not in (?)', Categorization.select(:picture_id).all])      
       @pictures = Picture.where(' id not in (SELECT picture_id from categorizations)')
     else
       @pictures = Picture.all
@@ -14,7 +13,7 @@ class Admin::PicturesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @pictures }
+      format.json { render json: @pictures }
     end
   end
 
@@ -25,7 +24,7 @@ class Admin::PicturesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @picture }
+      format.json { render json: @picture }
     end
   end
 
@@ -36,7 +35,7 @@ class Admin::PicturesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @picture }
+      format.json { render json: @picture }
     end
   end
 
@@ -52,11 +51,11 @@ class Admin::PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.save
-        format.html { redirect_to @picture, :notice => 'Picture was successfully created.' }
-        format.json { render :json => @picture, :status => :created, :location => @picture }
+        format.html { redirect_to @picture, notice: 'Picture was successfully created.' }
+        format.json { render json: @picture, status: :created, location: @picture }
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @picture.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @picture.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,11 +67,11 @@ class Admin::PicturesController < ApplicationController
 
     respond_to do |format|
       if @picture.update_attributes(params[:picture])
-        format.html { redirect_to @picture, :notice => 'Picture was successfully updated.' }
+        format.html { redirect_to @picture, notice: 'Picture was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render :action => "edit" }
-        format.json { render :json => @picture.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @picture.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -123,12 +122,12 @@ class Admin::PicturesController < ApplicationController
       File.rename(File.join(upload_dir, 'thumb-'+filename) , File.join(upload_dir, md5_thumb_filename))
 
       Picture.create(
-          :url =>  Rails.application.config.action_controller.asset_host.to_s + '/pictures/' + md5_filename, 
-          :thumb_url => Rails.application.config.action_controller.asset_host.to_s + '/pictures/' + md5_thumb_filename, 
-          :thumb_width => thumb.columns,
-          :thumb_height => thumb.rows,
-          :title => "test title", 
-          :caption => "test caption" )
+          url:  Rails.application.config.action_controller.asset_host.to_s + '/pictures/' + md5_filename, 
+          thumb_url: Rails.application.config.action_controller.asset_host.to_s + '/pictures/' + md5_thumb_filename, 
+          thumb_width: thumb.columns,
+          thumb_height: thumb.rows,
+          title: "test title", 
+          caption: "test caption" )
 
    end
   
