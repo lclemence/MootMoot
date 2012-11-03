@@ -22,6 +22,12 @@ set :deploy_via, :copy
 set :git_shallow_clone, 1
 set :copy_strategy, :export
 
+set :default_environment, {
+  'RBENV_ROOT' => '/home/gitdeploy/.rbenv',
+  'PATH' => "/home/gitdeploy/.rbenv/shims:/home/gitdeploy/.rbenv/bin:$PATH"
+}
+
+
 after "deploy:setup", "db:setup", "apache2:vhost"
 after "deploy:update_code", "db:symlink"
 
