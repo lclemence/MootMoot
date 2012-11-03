@@ -76,6 +76,7 @@ GEM
     multi_json (1.3.2)
     multi_xml (0.5.1)
     mysql2 (0.3.11)
+    newrelic_rpm (3.4.0.1)
     orm_adapter (0.0.7)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -150,6 +151,7 @@ DEPENDENCIES
   jquery-rails
   json
   mysql2
+  newrelic_rpm
   rails (= 3.2.3)
   rmagick
   rolify
