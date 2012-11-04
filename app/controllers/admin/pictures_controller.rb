@@ -105,7 +105,7 @@ class Admin::PicturesController < ApplicationController
       unless File.directory?(upload_dir)
         Dir.mkdir(upload_dir)
       end
-      File.open(Rails.root.join(upload_dir, filename), 'w') do |file|
+      File.open(Rails.root.join(upload_dir, filename), 'wb') do |file|
         file.write(uploaded_io.read)
       end
       md5 = Digest::MD5.hexdigest(File.read(File.join(upload_dir, filename)))
