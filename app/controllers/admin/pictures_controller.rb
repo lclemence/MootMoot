@@ -94,7 +94,7 @@ class Admin::PicturesController < ApplicationController
         @final_filenames << upload_picture(u)
       end
       
-      redirect_to pictures_path+'?last'
+      redirect_to admin_pictures_path+'?last'
   end
   
   def upload_picture(upload_file)
