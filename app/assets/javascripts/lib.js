@@ -124,7 +124,7 @@ var PelletStudio = {
 			var id=false;
 			var title=false;
 	        Array.each(request, function(gallery, g_index){
-      			var last=false;
+      				var last=false;
 	    			//galleryStorage[gallery.id]=new Array();
 	    			var Gname=trim(gallery.name).toUpperCase();	    			
 	    			galleryStorage[Gname]=new Array();	    			
@@ -134,50 +134,55 @@ var PelletStudio = {
 	    			var html='<div class="menu-line">'+
 						'<div class="menu-item"><a href="#!'+(trim((gallery.name).toString())).toUpperCase()+'">'+(gallery.name).toUpperCase()+'</a></div>'+
 					'</div>';
-	    			$('menu-galleries').innerHTML=$('menu-galleries').innerHTML +html;
 	    			
-	
-	          Array.each(gallery.pictures, function(picture, p_index){
-						
-	            
-							if (!galleryState.firstPicture) galleryState.firstPicture=id;
-							next=false;
-							id=picture.id;
-							src=picture.url;
-							src_thumb=picture.thumb_url;
-							title=picture.title;
-							caption=picture.caption;
-							position_x=(picture.thumb_x == '' ? 0 : parseInt(picture.thumb_x));
-							position_y=(picture.thumb_y == '' ? 0 : parseInt(picture.thumb_y));
+	    			html+='<ul>';
+	    			Array.each(gallery.child, function(child,p_index){
+	    					html+='<li>'+child.name+'</li>';
+	    			});
+	    			html+='</ul>';
 
-							//galleryStorage[gallery.id][id]=
-							galleryStorage[Gname][id]=							
-								new galleryUnit(
-									id,
-									addImage(src_thumb,id,position_x,position_y),
-									src,
-	                				src_thumb,
-									title,
-									caption,
-									last,
-									next,
-									p_index,
-									gallery.id,
-									gallery.name,
-                  picture.thumb_height,
-                  picture.thumb_width,
-                  position_x,
-                  position_y
-							)
-							//picturesArray[id]=galleryStorage[gallery.id][id];
-							picturesArray[id]=galleryStorage[Gname][id];							
-							//if (last) galleryStorage[gallery.id][last].next=id;
-							if (last) galleryStorage[Gname][last].next=id;
-							last=id;
-	
-	
-	
-	          })          
+					$('menu-galleries').innerHTML=$('menu-galleries').innerHTML +html;
+			          Array.each(gallery.pictures, function(picture, p_index){
+								
+			            
+									if (!galleryState.firstPicture) galleryState.firstPicture=id;
+									next=false;
+									id=picture.id;
+									src=picture.url;
+									src_thumb=picture.thumb_url;
+									title=picture.title;
+									caption=picture.caption;
+									position_x=(picture.thumb_x == '' ? 0 : parseInt(picture.thumb_x));
+									position_y=(picture.thumb_y == '' ? 0 : parseInt(picture.thumb_y));
+
+									//galleryStorage[gallery.id][id]=
+									galleryStorage[Gname][id]=							
+										new galleryUnit(
+											id,
+											addImage(src_thumb,id,position_x,position_y),
+											src,
+			                				src_thumb,
+											title,
+											caption,
+											last,
+											next,
+											p_index,
+											gallery.id,
+											gallery.name,
+		                  picture.thumb_height,
+		                  picture.thumb_width,
+		                  position_x,
+		                  position_y
+									)
+									//picturesArray[id]=galleryStorage[gallery.id][id];
+									picturesArray[id]=galleryStorage[Gname][id];							
+									//if (last) galleryStorage[gallery.id][last].next=id;
+									if (last) galleryStorage[Gname][last].next=id;
+									last=id;
+			
+			
+			
+			          })          
 	        })
 					PelletStudio.galleriesLoaded();
       }
@@ -556,8 +561,9 @@ After the first 20kms a $1 per km travel charge may apply.\
 		
 	displayGallery:function(galleryName){
 		$('content').empty();
-		
-		galleryState.galleryLength=galleryStorage[galleryName].flatten().length;
+		if (galleryStorage[galleryName] != undefined){
+			galleryState.galleryLength=galleryStorage[galleryName].flatten().length;
+		}
 		loadGallery(galleryName);
 	}
 }

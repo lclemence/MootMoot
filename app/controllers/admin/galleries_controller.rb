@@ -4,7 +4,8 @@ class Admin::GalleriesController < ApplicationController
   # GET /galleries
   # GET /galleries.json
   def index
-    @galleries = Gallery.all
+    #@galleries = Gallery.all
+    @galleries = Gallery.where("parent_id is null")
 
     respond_to do |format|
       format.html # index.html.erb

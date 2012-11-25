@@ -1,0 +1,23 @@
+#main{
+	width: 500px;margin: 10px auto;
+}
+
+#accordion h3{
+	background: #cccccc;
+	border-bottom: solid 2px #999999;
+	font-size: 12px;
+	color:#999999;
+	padding:4px;
+}
+
+#accordion li{
+	border-bottom: solid 1px #dedede;
+}
+
+#accordion li a{
+	padding:3px 6px; display:block;text-decoration: none;
+}
+
+#accordion li a:hover{
+	background: #efefef;
+}

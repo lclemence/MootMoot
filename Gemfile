@@ -34,8 +34,11 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'mootools-rails'
 
 gem 'rmagick'
+
+gem 'bugsnag'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

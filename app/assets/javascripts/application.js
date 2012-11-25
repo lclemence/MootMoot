@@ -10,7 +10,13 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require mootools-core-1.4.5-full-nocompat
-//= require mootools-more-1.4.0.1
+// require mootools-core-1.4.5-full-nocompat
+// require mootools-more-1.4.0.1
+//= require mootools
+//= require mootools_ujs
+//= require mootools-more
+
+//= require_self
+//= require navigation
 //= require lib
 // require_tree .

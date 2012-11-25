@@ -68,7 +68,7 @@ User.new({:email => mail, :password => "pacome", :password_confirmation => "paco
 mail = "ybenmati@yahoo.fr"
 User.new({:email => mail, :password => "pacome", :password_confirmation => "pacome" }).save
 
-Baby.new({ :name => "Pacome" }).save
+#Baby.new({ :name => "Pacome" }).save
 
 password = Devise.friendly_token[0,20]
 User.new({:email => "pelletj@gmail.com", :password => password, :password_confirmation => password }).save 
@@ -76,8 +76,8 @@ User.find_by_email("pelletj@gmail.com").add_role :admin
 User.find_by_email("lelongclemence@gmail.com").add_role :admin
 #Role.create({:name => "admin"}).save
 
-repository = "/home/jpellet/DEV/julienpellet.com-php/gallery/all"
-#repository = "/home/clemence/Pictures/all"
+#repository = "/home/jpellet/DEV/julienpellet.com-php/gallery/all"
+repository = "/home/clemence/Pictures/all"
 Categorization.delete_all
 Picture.delete_all
 i=0

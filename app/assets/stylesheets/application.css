@@ -11,6 +11,7 @@
  *= require_self
  *= require main 
  *= require bootstrap
+ *= require navigation
  * require_tree .
 */
 
