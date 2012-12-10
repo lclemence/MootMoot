@@ -15,7 +15,7 @@ set :keep_releases, 5
 set :scm, :git
 set :repository, "git@github.com:lclemence/MootMoot.git"
 
-set :user, 'gitdeploy'
+set :user, 'ubuntu'
 set :use_sudo, false
 
 set :deploy_via, :copy
