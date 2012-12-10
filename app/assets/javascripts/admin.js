@@ -13,6 +13,6 @@
 //= require mootools-core-1.4.5-full-nocompat
 //= require mootools-more-1.4.0.1
 //= require jquery
-//= require jquery-ui-1.8.20.custom.min
+//= require jquery-ui
 //= require bootstrap-modal
 //= require ysr-crop
