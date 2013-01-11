@@ -98,6 +98,7 @@ class Admin::PicturesController < ApplicationController
   end
   
   def upload_picture(upload_file)
+     
      uploaded_io = upload_file
       filename = uploaded_io.original_filename
       upload_dir=Rails.root.join('public/pictures')
@@ -105,7 +106,8 @@ class Admin::PicturesController < ApplicationController
       unless File.directory?(upload_dir)
         Dir.mkdir(upload_dir)
       end
-      File.open(Rails.root.join(upload_dir, filename), 'wb') do |file|
+
+      File.open(Rails.root.join(upload_dir, filename), 'wb') do |file|        
         file.write(uploaded_io.read)
       end
       md5 = Digest::MD5.hexdigest(File.read(File.join(upload_dir, filename)))
@@ -113,7 +115,11 @@ class Admin::PicturesController < ApplicationController
 
       File.rename(File.join(upload_dir, filename) , File.join(upload_dir, md5_filename))
 
-      thumb = resize upload_dir, md5_filename
+      new_img = resize_img(File.join(upload_dir, md5_filename))
+
+      new_img.write(File.join(upload_dir, md5_filename))
+
+      thumb = resize_thumb upload_dir, md5_filename
 
       thumb.write(File.join(upload_dir, 'thumb-'+filename))
 
@@ -132,7 +138,7 @@ class Admin::PicturesController < ApplicationController
    end
   
 
-  def resize(upload_dir, filename)
+  def resize_thumb(upload_dir, filename)
     img_orig = Magick::Image.read(File.join(upload_dir, filename)).first
     width_orig = img_orig.columns
     height_orig = img_orig.rows
@@ -141,6 +147,22 @@ class Admin::PicturesController < ApplicationController
     new_w = width_orig * new_h / height_orig
     if (new_w < 220)
       new_w = 220
+      new_h = height_orig * new_w / width_orig
+    end
+
+    img_orig.resize(new_w,new_h)
+  end
+
+  def resize_img( filename)
+    img_orig = Magick::Image.read(filename).first
+    width_orig = img_orig.columns
+    height_orig = img_orig.rows
+  
+    if width_orig < height_orig
+      new_h = 600
+      new_w = width_orig * new_h / height_orig 
+    else
+      new_w = 800
       new_h = height_orig * new_w / width_orig
     end
 

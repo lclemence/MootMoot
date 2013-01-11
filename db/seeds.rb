@@ -14,7 +14,7 @@ Constant.create(:name => 'cdn_key_secret', :value => 'cdn_secret')
 
 
 Gallery.delete_all
-gal = Gallery.create(:name => "WELLINGTON")
+gal = Gallery.create(:name => "Wellington")
 Gallery.create(:name => "Nature")
 Gallery.create(:name => "Portrait")
 Gallery.create(:name => "Fine Art")

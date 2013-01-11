@@ -98,7 +98,7 @@ class Admin::GalleriesController < ApplicationController
         i=i+1
       end
     end
-    redirect_to galleries_url
+    redirect_to admin_galleries_url
   end
   
 end

@@ -87,19 +87,19 @@ $(document).ready(function() {
 </table>
 
 <% @galleries.each do |gallery| %>
-	<div class="modal" id="modal_gallery_<%= gallery.id%>" style="display: none;width:730px;overflow-x:hidden;">
+	<div class="modal" id="modal_gallery_<%= gallery.id%>" style="display: none;width:900px;overflow-x:hidden;left:40%;">
 		<div class="modal-header">
 			<button class="close" data-dismiss="modal">
 				×
 			</button>
 			<h3><%= gallery.name%></h3>
 		</div>
-		<div class="modal-body" style="max-height:350px;">			
-			<div style="float:left;width:336px;">
+		<div class="modal-body" style="overflow-y:hidden;">			
+			<div style="float:left;width:420px;">
 				<h4>All pictures</h4>
-				<ul id="gallery_left_<%= gallery.id%>" style="width:336px;">					
+				<ul id="gallery_left_<%= gallery.id%>" style="height:390px;width:420px;overflow-y:scroll;">
 					<% Picture.all.each do |picture| %>
-						<li id="left_gallery_<%= gallery.id%>_picture_<%= picture.id%>" class="ui-state-highlight" style="float:left;padding:2px 2px 2px 2px;">
+						<li id="left_gallery_<%= gallery.id%>_picture_<%= picture.id%>" class="ui-state-highlight" style="float:left;padding:2px 2px 2px 2px;">							
 							<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
 							<input type="hidden" name="pictures[]" value="<%= picture.id%>"/>
 						</li>	
@@ -107,14 +107,14 @@ $(document).ready(function() {
 				</ul>
 			</div>
 			<div class="vertical_line"></div>
-			<div style="float:left;width:336px;">
+			<div style="float:left;width:420px;">
 				<h4>Current pictures</h4>
 				<%=form_tag(admin_picturestogallery_path, :method => "post", :id => "form_gallery_" + gallery.id.to_s, :name => "form_gallery_" + gallery.id.to_s) %>	
 					<input type="hidden" name="gallery_id" value="<%=gallery.id%>"/>			
-					<div style="width:336px;">
+					<div style="width:420px;">
 						<div id="gallery_trash" class="img-trash"></div>
 						<hr>
-						<ul id="gallery_right_<%= gallery.id%>" style="min-height:150px">					
+						<ul id="gallery_right_<%= gallery.id%>" style="width:420px;height:315px;overflow-y:scroll;">					
 						<% gallery.pictures.each do |picture| %>
 							<li style="float:left;padding:2px 2px 2px 2px;" class="ui-state-default">
 								<img class='thumb' src="<%= picture.thumb_url %>" width="80px"/>
