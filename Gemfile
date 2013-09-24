@@ -12,8 +12,8 @@ gem 'http_accept_language'
 
 gem 'json'
 
-gem 'execjs' 
-gem 'therubyracer' 
+#gem 'execjs' 
+#gem 'therubyracer' 
 
 gem 'devise'
 gem 'cancan'
