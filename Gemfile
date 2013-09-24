@@ -40,6 +40,8 @@ gem "jquery-rails", "~> 2.3.0"
 
 gem 'rmagick'
 
+gem 'rake', '0.9.2.2'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
